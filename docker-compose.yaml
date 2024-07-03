@@ -1,5 +1,3 @@
-version: "3.1"
-
 services:
   iot-agent:
     image: iotagent4fiware/iotagent-opcua:latest
@@ -85,6 +83,33 @@ services:
       - "1026:1026"
     command: -dbhost mongodb -logLevel DEBUG -forwarding -experimental
 
+  # sth-comet:
+  #   image: fiware/sth-comet
+  #   hostname: sth-comet
+  #   links:
+  #     - mongodb
+  #   networks:
+  #     - hostnet
+  #   ports:
+  #     - "8666:8666"
+  #   environment:
+  #     - STH_HOST=0.0.0.0
+  #     - STH_PORT=8666
+  #     - DB_PREFIX=sth_
+  #     - DB_URI=mongodb:27017
+  #     - DATA_MODEL=collection-per-entity
+  #     - LOGOPS_LEVEL=DEBUG 
+  
+  # grafana:
+  #   build: ./build/grafana
+  #   networks:
+  #     - hostnet
+  #   volumes:
+  #    - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+  #    - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
+  #   ports:
+  #    - 3000:3000  
+  
 volumes:
   mongodb: ~
 
