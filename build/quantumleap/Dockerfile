@@ -19,11 +19,11 @@ COPY . /src/ngsi-timeseries-api/
 COPY /custom-init.sh /src/ngsi-timeseries-api/src/custom-init.sh
 COPY /inject.sh /src/ngsi-timeseries-api/src/inject.sh
 
-RUN chown nifi /src/ngsi-timeseries-api/src/custom-init.sh  && \
-    chgrp nifi /src/ngsi-timeseries-api/src/custom-init.sh
+RUN chown root /src/ngsi-timeseries-api/src/custom-init.sh  && \
+    chgrp root /src/ngsi-timeseries-api/src/custom-init.sh
 
-RUN chown nifi /src/ngsi-timeseries-api/src/inject.sh  && \
-    chgrp nifi /src/ngsi-timeseries-api/src/inject.sh
+RUN chown root /src/ngsi-timeseries-api/src/inject.sh  && \
+    chgrp root /src/ngsi-timeseries-api/src/inject.sh
 
 RUN chmod 775 /src/ngsi-timeseries-api/src/custom-init.sh
 RUN chmod 775 /src/ngsi-timeseries-api/src/inject.sh
@@ -35,4 +35,4 @@ ENV PYTHONPATH=$PWD:$PYTHONPATH
 
 EXPOSE 8668
 #ENTRYPOINT ["python", "app.py"]
-ENTRYPOINT ["custom-init.sh"]
+ENTRYPOINT ["sh", "custom-init.sh"]
