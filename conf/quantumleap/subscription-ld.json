@@ -1,0 +1,30 @@
+{
+  "type": "Subscription",
+  "name": "Car-Subscription",
+  "description": "Car subscription",
+  "entities": [
+    {
+      "id": "urn:ngsi-ld:Device:age01_Car",
+      "type": "Device"
+    }
+  ],
+  "watchedAttributes": [
+    "Engine_Oxigen",
+    "Engine_Temperature"
+  ],
+  "notification": {
+    "attributes": ["CarAcceleration", "CarEngineOxigen"],
+    "format": "normalized",
+    "endpoint": {
+      "uri": "http://quantumleap:8668/v2/notify",
+      "accept": "application/json",
+      "receiverInfo": [
+        {
+          "key": "fiware-service",
+          "value": "opcua_car"
+        }
+      ]
+    }
+  },
+  "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+}

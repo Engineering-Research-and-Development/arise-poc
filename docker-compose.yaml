@@ -40,11 +40,11 @@ services:
       - "IOTA_EXPLICITATTRS=true"
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://my-local-opcua-server:4840"
-      - "IOTA_OPCUA_SECURITY_MODE=SignAndEncrypt"
-      - "IOTA_OPCUA_SECURITY_POLICY=Basic256Sha256"
-      - "IOTA_OPCUA_SECURITY_USERNAME=user1"
-      - "IOTA_OPCUA_SECURITY_PASSWORD=test"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://iotcarsrv:5001/UA/CarServer"
+      - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
+      - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
+      # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
+      # - "IOTA_OPCUA_SECURITY_PASSWORD=test"
       - "IOTA_OPCUA_UNIQUE_SUBSCRIPTION=false"
       - "IOTA_OPCUA_SUBSCRIPTION_NOTIFICATIONS_PER_PUBLISH=1000"
       - "IOTA_OPCUA_SUBSCRIPTION_PUBLISHING_ENABLED=true"
@@ -66,14 +66,14 @@ services:
     hostname: mongodb
     networks:
       - hostnet
-    expose:
-      - "27017"
-    command: --bind_ip_all
+    ports:
+      - "27017:27017"
+    command: --bind_ip_all --nojournal
     volumes:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.5.1
+    image: fiware/orion-ld:1.6.0
     hostname: orion
     depends_on:
       - mongodb
@@ -81,7 +81,7 @@ services:
       - hostnet
     ports:
       - "1026:1026"
-    command: -dbhost mongodb -logLevel DEBUG -forwarding -experimental
+    command: -dbhost mongodb -logLevel DEBUG # -forwarding -experimental
 
   # sth-comet:
   #   image: fiware/sth-comet
@@ -100,15 +100,58 @@ services:
   #     - DATA_MODEL=collection-per-entity
   #     - LOGOPS_LEVEL=DEBUG 
   
-  # grafana:
-  #   build: ./build/grafana
-  #   networks:
-  #     - hostnet
-  #   volumes:
-  #    - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-  #    - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
-  #   ports:
-  #    - 3000:3000  
+  iotcarsrv:
+    image: iotagent4fiware/opcuacarsrv:latest
+    hostname: iotcarsrv
+    networks:
+      - hostnet
+    ports:
+      - "5001:5001"
+
+  crate-db:
+    image: crate:4.1.4
+    hostname: crate-db
+    networks:
+      - hostnet
+    ports:
+      - "4200:4200"
+      - "4300:4300"
+    command:
+      crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    environment:
+      - CRATE_HEAP_SIZE=2g
+
+  quantumleap:
+    #image: smartsdk/quantumleap
+    build: ./build/quantumleap
+    hostname: quantumleap
+    networks:
+      - hostnet
+    ports:
+      - "8668:8668"
+    depends_on:
+      - crate-db
+    environment:
+      - CRATE_HOST=crate-db
+      - AUTOMATIC_SUBSCRIPTION=true
+    volumes:
+      - ./conf/quantumleap/subscription-ld.json:/src/ngsi-timeseries-api/src/subscription-ld.json
+
+  grafana:
+    image: grafana/grafana:latest
+    hostname: grafana
+    networks:
+      - hostnet
+    ports:
+      - 3000:3000  
+    depends_on:
+      - crate-db
+    environment:
+      - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
+    volumes:
+      - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
+
   
 volumes:
   mongodb: ~
