@@ -116,10 +116,23 @@ subscription_file="/src/ngsi-timeseries-api/src/subscription-ld.json"
 if [ -e "$subscription_file" ]; then
     tenant=$(jq -r '.notification.endpoint.receiverInfo[] | select(.key == "fiware-service") | .value' "$subscription_file")
    
-    curl -L -X POST 'http://orion:1026/ngsi-ld/v1/subscriptions/' \
+    subscription_status=$(curl -s -L -o /dev/null -w "%{http_code}" -X POST 'http://orion:1026/ngsi-ld/v1/subscriptions/' \
     -H 'Content-Type: application/ld+json' \
     -H "NGSILD-Tenant: $tenant" \
-    -d @"$subscription_file"
+    -d @"$subscription_file")
+
+    if [ "$subscription_status" -ne 201 ] ; then
+        echo 'Subscription could not be sent :( :('
+        exit 1
+    else
+        echo "
+        ========================================================
+
+        Subscription sent successfully!
+
+        ========================================================
+        "
+    fi
 else
     echo 'The subscription file has not been found :( :('
     exit 1

@@ -9,4 +9,4 @@ Starting custom init
 ========================================================
 ========================================================
 "
-/src/ngsi-timeseries-api/src/inject.sh & /src/ngsi-timeseries-api/src/app.py
+/src/ngsi-timeseries-api/src/inject.sh & python /src/ngsi-timeseries-api/src/app.py
