@@ -62,7 +62,7 @@ services:
       - ./conf/iotagent-opcua:/opt/iotagent-opcua/conf
 
   mongodb:
-    image: mongo:latest
+    image: mongo:4.4 #latest
     hostname: mongodb
     networks:
       - hostnet
@@ -81,7 +81,7 @@ services:
       - hostnet
     ports:
       - "1026:1026"
-    command: -dbhost mongodb -logLevel DEBUG -mongocOnly # -forwarding -experimental
+    command: -dbhost mongodb -logLevel DEBUG # -mongocOnly -forwarding -experimental
 
   # sth-comet:
   #   image: fiware/sth-comet
