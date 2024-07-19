@@ -4,8 +4,8 @@ USER root
 
 RUN apk add jq nano
 
-COPY /custom-init.sh /src/ngsi-timeseries-api/src/custom-init.sh
-COPY /inject.sh /src/ngsi-timeseries-api/src/inject.sh
+COPY custom-init.sh /src/ngsi-timeseries-api/src/custom-init.sh
+COPY inject.sh /src/ngsi-timeseries-api/src/inject.sh
 
 RUN chown root /src/ngsi-timeseries-api/src/custom-init.sh  && \
     chgrp root /src/ngsi-timeseries-api/src/custom-init.sh

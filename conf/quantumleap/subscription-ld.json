@@ -9,11 +9,12 @@
     }
   ],
   "watchedAttributes": [
-    "Engine_Oxigen",
-    "Engine_Temperature"
+    "CarAcceleration",
+    "CarEngineOxigen",
+    "CanEngineTemperature"
   ],
   "notification": {
-    "attributes": ["CarAcceleration", "CarEngineOxigen"],
+    "attributes": ["CarAcceleration", "CarEngineOxigen", "CanEngineTemperature"],
     "format": "normalized",
     "endpoint": {
       "uri": "http://quantumleap:8668/v2/notify",
