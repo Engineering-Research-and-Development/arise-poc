@@ -14,7 +14,7 @@ services:
       - "9229:9229"
     environment:
       # Environment variables as before
-      - "CONFIGURATION_TYPE=auto"
+      - "CONFIGURATION_TYPE=static"
       - "CONFIG_RETRIEVAL=false"
       - "DEFAULT_KEY=iot"
       - "DEFAULT_TRANSPORT=OPCUA"
@@ -82,31 +82,6 @@ services:
     ports:
       - "1026:1026"
     command: -dbhost mongodb -logLevel DEBUG # -mongocOnly -forwarding -experimental
-
-  # sth-comet:
-  #   image: fiware/sth-comet
-  #   hostname: sth-comet
-  #   links:
-  #     - mongodb
-  #   networks:
-  #     - hostnet
-  #   ports:
-  #     - "8666:8666"
-  #   environment:
-  #     - STH_HOST=0.0.0.0
-  #     - STH_PORT=8666
-  #     - DB_PREFIX=sth_
-  #     - DB_URI=mongodb:27017
-  #     - DATA_MODEL=collection-per-entity
-  #     - LOGOPS_LEVEL=DEBUG 
-  
-  iotcarsrv:
-    image: iotagent4fiware/opcuacarsrv:latest
-    hostname: iotcarsrv
-    networks:
-      - hostnet
-    ports:
-      - "5001:5001"
 
   crate-db:
     image: crate:4.1.4
