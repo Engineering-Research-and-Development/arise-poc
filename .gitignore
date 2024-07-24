@@ -1,2 +1,3 @@
 docker-compose-dev.yaml
 conf/iotagent-opcua/config_mapping_tool.json
+conf/iotagent-opcua/*.bkp

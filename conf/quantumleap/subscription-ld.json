@@ -4,17 +4,55 @@
   "description": "Car subscription",
   "entities": [
     {
-      "id": "urn:ngsi-ld:Device:age01_Car",
+      "id": "urn:ngsi-ld:Device:servidor_1DBRVC",
       "type": "Device"
     }
   ],
   "watchedAttributes": [
-    "CarAcceleration",
-    "CarEngineOxigen",
-    "CanEngineTemperature"
+    "Step_data_out",
+    "State_bits",
+    "Ready_flag",
+    "Current_position",
+    "Current_speed",
+    "Pushing_force",
+    "Target_position1",
+    "Alarm1",
+    "Alarm2",
+    "Alarm3",
+    "Alarm4",
+    "BUSY",
+    "SVRE",
+    "SETON",
+    "INP",
+    "AREA",
+    "WAREA",
+    "ESTOP",
+    "ALARM",
+    "Search_0"
   ],
   "notification": {
-    "attributes": ["CarAcceleration", "CarEngineOxigen", "CanEngineTemperature"],
+    "attributes": [
+      "Step_data_out",
+      "State_bits",
+      "Ready_flag",
+      "Current_position",
+      "Current_speed",
+      "Pushing_force",
+      "Target_position1",
+      "Alarm1",
+      "Alarm2",
+      "Alarm3",
+      "Alarm4",
+      "BUSY",
+      "SVRE",
+      "SETON",
+      "INP",
+      "AREA",
+      "WAREA",
+      "ESTOP",
+      "ALARM",
+      "Search_0"
+    ],
     "format": "normalized",
     "endpoint": {
       "uri": "http://quantumleap:8668/v2/notify",

@@ -157,9 +157,275 @@ config.iota = {
      *
      *      https://github.com/Engineering-Research-and-Development/iotagent-opcua#type-configuration
      */
-    types: {},
-    contexts: [],
-    contextSubscriptions: [],
+    types: {
+        Device: {
+            active: [
+                {
+                    name: "Clock_0.5Hz",
+                    type: "Boolean"
+                },
+                {
+                    name: "Icon",
+                    type: "ByteString"
+                },
+                {
+                    name: "Step_data_out",
+                    type: "Byte"
+                },
+                {
+                    name: "State_bits",
+                    type: "Byte"
+                },
+                {
+                    name: "Ready_flag",
+                    type: "Boolean"
+                },
+                {
+                    name: "Current_position",
+                    type: "Float"
+                },
+                {
+                    name: "Current_speed",
+                    type: "Int16"
+                },
+                {
+                    name: "Pushing_force",
+                    type: "Int16"
+                },
+                {
+                    name: "Target_position1",
+                    type: "Float"
+                },
+                {
+                    name: "Alarm1",
+                    type: "Byte"
+                },
+                {
+                    name: "Alarm2",
+                    type: "Byte"
+                },
+                {
+                    name: "Alarm3",
+                    type: "Byte"
+                },
+                {
+                    name: "Alarm4",
+                    type: "Byte"
+                },
+                {
+                    name: "BUSY",
+                    type: "Boolean"
+                },
+                {
+                    name: "SVRE",
+                    type: "Boolean"
+                },
+                {
+                    name: "SETON",
+                    type: "Boolean"
+                },
+                {
+                    name: "INP",
+                    type: "Boolean"
+                },
+                {
+                    name: "AREA",
+                    type: "Boolean"
+                },
+                {
+                    name: "WAREA",
+                    type: "Boolean"
+                },
+                {
+                    name: "ESTOP",
+                    type: "Boolean"
+                },
+                {
+                    name: "ALARM",
+                    type: "Boolean"
+                },
+                {
+                    name: "Search_0",
+                    type: "Boolean"
+                }
+            ],
+            lazy: [],
+            commands: [
+                {
+                    name: "plc_maestro",
+                    type: "command"
+                },
+                {
+                    name: "DeviceSetplc_maestro",
+                    type: "command"
+                }
+            ]
+        }
+    },
+    contexts: [
+        {
+            id: "urn:ngsi-ld:Device:servidor_1DBRVC",
+            type: "Device",
+            mappings: [
+                {
+                    ocb_id: "Clock_0.5Hz",
+                    opcua_id: "ns=4;i=23",
+                    object_id: "ns=4;i=23",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Icon",
+                    opcua_id: "ns=3;i=6010",
+                    object_id: "ns=3;i=6010",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Step_data_out",
+                    opcua_id: "ns=4;i=3",
+                    object_id: "ns=4;i=3",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "State_bits",
+                    opcua_id: "ns=4;i=4",
+                    object_id: "ns=4;i=4",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Ready_flag",
+                    opcua_id: "ns=4;i=5",
+                    object_id: "ns=4;i=5",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Current_position",
+                    opcua_id: "ns=4;i=6",
+                    object_id: "ns=4;i=6",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Current_speed",
+                    opcua_id: "ns=4;i=7",
+                    object_id: "ns=4;i=7",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Pushing_force",
+                    opcua_id: "ns=4;i=8",
+                    object_id: "ns=4;i=8",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Target_position1",
+                    opcua_id: "ns=4;i=9",
+                    object_id: "ns=4;i=9",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Alarm1",
+                    opcua_id: "ns=4;i=10",
+                    object_id: "ns=4;i=10",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Alarm2",
+                    opcua_id: "ns=4;i=11",
+                    object_id: "ns=4;i=11",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Alarm3",
+                    opcua_id: "ns=4;i=12",
+                    object_id: "ns=4;i=12",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Alarm4",
+                    opcua_id: "ns=4;i=13",
+                    object_id: "ns=4;i=13",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "BUSY",
+                    opcua_id: "ns=4;i=14",
+                    object_id: "ns=4;i=14",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "SVRE",
+                    opcua_id: "ns=4;i=15",
+                    object_id: "ns=4;i=15",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "SETON",
+                    opcua_id: "ns=4;i=16",
+                    object_id: "ns=4;i=16",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "INP",
+                    opcua_id: "ns=4;i=17",
+                    object_id: "ns=4;i=17",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "AREA",
+                    opcua_id: "ns=4;i=18",
+                    object_id: "ns=4;i=18",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "WAREA",
+                    opcua_id: "ns=4;i=19",
+                    object_id: "ns=4;i=19",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "ESTOP",
+                    opcua_id: "ns=4;i=20",
+                    object_id: "ns=4;i=20",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "ALARM",
+                    opcua_id: "ns=4;i=21",
+                    object_id: "ns=4;i=21",
+                    inputArguments: []
+                },
+                {
+                    ocb_id: "Search_0",
+                    opcua_id: "ns=4;i=22",
+                    object_id: "ns=4;i=22",
+                    inputArguments: []
+                }
+            ]
+        }
+    ],
+    contextSubscriptions: [
+        {
+            id: "urn:ngsi-ld:Device:servidor_1DBRVC",
+            type: "Device",
+            mappings: [
+                {
+                    ocb_id: "plc_maestro",
+                    opcua_id: "ns=3;s=PLC",
+                    object_id: "ns=3;i=1000",
+                    inputArguments: [
+                        {}
+                    ]
+                },
+                {
+                    ocb_id: "DeviceSetplc_maestro",
+                    opcua_id: "ns=3;s=PLC",
+                    object_id: "ns=3;i=1000",
+                    inputArguments: [
+                        {}
+                    ]
+                }
+            ]
+        }
+    ],
     events: [],
     /**
      * Default service, for IoT Agent installations that won't require preregistration.
