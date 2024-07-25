@@ -465,7 +465,11 @@ config.iota = {
     /**
      * Flag indicating whether to provision the Group and Device automatically
      */
-    autoprovision: true
+    autoprovision: true,
+    /**
+    * Default limit for express router built into iotagent-node-lib module
+    */
+    expressLimit: '50mb'
 };
 
 config.opcua = {
@@ -483,7 +487,7 @@ config.opcua = {
     /**
      * Endpoint where the IoT Agent will listen for an active OPC UA Server.
      */
-    endpoint: 'opc.tcp://localhost:5001/UA/CarServer',
+    endpoint: 'opc.tcp://0.0.0.0:4840/cartif',
     /**
      * Security Mode to access OPC UA Server.
      */

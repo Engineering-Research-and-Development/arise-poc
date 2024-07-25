@@ -1,6 +1,6 @@
 services:
   iot-agent:
-    image: iotagent4fiware/iotagent-opcua:latest
+    image: iotagent4fiware/iotagent-opcua:2.2.7
     hostname: iotagent-opcua
     depends_on:
       - mongodb
@@ -40,7 +40,8 @@ services:
       - "IOTA_EXPLICITATTRS=true"
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://iotcarsrv:5001/UA/CarServer"
+      - "IOTA_EXPRESS_LIMIT=50mb"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/cartif"
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
@@ -97,7 +98,6 @@ services:
       - CRATE_HEAP_SIZE=2g
 
   quantumleap:
-    #image: smartsdk/quantumleap
     build: ./build/quantumleap
     hostname: quantumleap
     networks:
