@@ -24,14 +24,14 @@ services:
       - "IOTA_CB_PORT=1026"
       - "IOTA_CB_NGSIVERSION=ld"
       - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-      - "IOTA_CB_SERVICE=opcua_car"
+      - "IOTA_CB_SERVICE=opcua_cartif"
       - "IOTA_CB_SUBSERVICE=/demo"
       - "IOTA_NORTH_PORT=4041"
       - "IOTA_REGISTRY_TYPE=mongodb"
       - "IOTA_MONGO_HOST=mongodb"
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
-      - "IOTA_SERVICE=opcua_car"
+      - "IOTA_SERVICE=opcua_cartif"
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -92,6 +92,7 @@ services:
     ports:
       - "4200:4200"
       - "4300:4300"
+      - "5432:5432"
     command:
       crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
     environment:
@@ -110,7 +111,7 @@ services:
       - CRATE_HOST=crate-db
       - AUTOMATIC_SUBSCRIPTION=true
     volumes:
-      - ./conf/quantumleap/subscription-ld.json:/src/ngsi-timeseries-api/src/subscription-ld.json
+      - ./conf/quantumleap/subscriptions:/src/ngsi-timeseries-api/src/subscriptions
 
   grafana:
     image: grafana/grafana:latest

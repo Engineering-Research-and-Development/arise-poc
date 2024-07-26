@@ -57,7 +57,7 @@ config.iota = {
         /**
          * Used as fallbackTenant
          */
-        service: 'opcua_car',
+        service: 'opcua_cartif',
         /**
          * Used as fallbackPath
          */
@@ -430,7 +430,7 @@ config.iota = {
     /**
      * Default service, for IoT Agent installations that won't require preregistration.
      */
-    service: 'opcua_car',
+    service: 'opcua_cartif',
     /**
      * Default subservice, for IoT Agent installations that won't require preregistration.
      */

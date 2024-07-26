@@ -60,7 +60,7 @@
       "receiverInfo": [
         {
           "key": "fiware-service",
-          "value": "opcua_car"
+          "value": "opcua_cartif"
         }
       ]
     }
