@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Alarm3"
+      "Ready_flag"
     ],
     "notification": {
       "attributes": [
-        "Alarm3"
+        "Ready_flag"
       ],
       "format": "normalized",
       "endpoint": {
@@ -27,6 +27,7 @@
         ]
       }
     },
+    "throttling": 0,
     "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
   }
   

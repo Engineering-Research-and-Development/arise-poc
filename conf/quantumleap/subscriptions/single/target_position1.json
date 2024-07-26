@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Alarm1"
+      "Target_position1"
     ],
     "notification": {
       "attributes": [
-        "Alarm1"
+        "Target_position1"
       ],
       "format": "normalized",
       "endpoint": {
@@ -27,6 +27,7 @@
         ]
       }
     },
+    "throttling": 0,
     "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
   }
   
