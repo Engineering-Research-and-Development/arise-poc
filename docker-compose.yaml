@@ -124,8 +124,10 @@ services:
       - crate-db
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
+     
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
 
   

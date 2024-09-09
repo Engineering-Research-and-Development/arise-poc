@@ -9,13 +9,13 @@
     }
   ],
   "watchedAttributes": [
-    "Step_data_out",
-    "State_bits",
-    "Ready_flag",
-    "Current_position",
-    "Current_speed",
-    "Pushing_force",
-    "Target_position1",
+    "StepDataOut",
+    "StateBits",
+    "ReadyFlag",
+    "CurrentPosition",
+    "CurrentSpeed",
+    "PushingForce",
+    "TargetPosition1",
     "Alarm1",
     "Alarm2",
     "Alarm3",
@@ -28,17 +28,18 @@
     "WAREA",
     "ESTOP",
     "ALARM",
-    "Search_0"
+    "Search0",
+	"Clock05Hz"
   ],
   "notification": {
     "attributes": [
-      "Step_data_out",
-      "State_bits",
-      "Ready_flag",
-      "Current_position",
-      "Current_speed",
-      "Pushing_force",
-      "Target_position1",
+      "StepDataOut",
+      "StateBits",
+      "ReadyFlag",
+      "CurrentPosition",
+      "CurrentSpeed",
+      "PushingForce",
+      "TargetPosition1",
       "Alarm1",
       "Alarm2",
       "Alarm3",
@@ -51,7 +52,8 @@
       "WAREA",
       "ESTOP",
       "ALARM",
-      "Search_0"
+      "Search0",
+	  "Clock05Hz"
     ],
     "format": "normalized",
     "endpoint": {

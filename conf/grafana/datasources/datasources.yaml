@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+  - name: cratedb
+    type: grafana-postgresql-datasource
+    url: crate-db:5432
+    user: crate
+    secureJsonData:
+      password: ''
+    jsonData:
+      database: mtopcua_cartif
+      sslmode: 'disable'

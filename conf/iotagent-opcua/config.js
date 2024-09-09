@@ -161,7 +161,7 @@ config.iota = {
         Device: {
             active: [
                 {
-                    name: "Clock_0.5Hz",
+                    name: "Clock05Hz",
                     type: "Boolean"
                 },
                 {
@@ -169,31 +169,31 @@ config.iota = {
                     type: "ByteString"
                 },
                 {
-                    name: "Step_data_out",
+                    name: "StepDataOut",
                     type: "Byte"
                 },
                 {
-                    name: "State_bits",
+                    name: "StateBits",
                     type: "Byte"
                 },
                 {
-                    name: "Ready_flag",
+                    name: "ReadyFlag",
                     type: "Boolean"
                 },
                 {
-                    name: "Current_position",
+                    name: "CurrentPosition",
                     type: "Float"
                 },
                 {
-                    name: "Current_speed",
+                    name: "CurrentSpeed",
                     type: "Int16"
                 },
                 {
-                    name: "Pushing_force",
+                    name: "PushingForce",
                     type: "Int16"
                 },
                 {
-                    name: "Target_position1",
+                    name: "TargetPosition1",
                     type: "Float"
                 },
                 {
@@ -245,7 +245,7 @@ config.iota = {
                     type: "Boolean"
                 },
                 {
-                    name: "Search_0",
+                    name: "Search0",
                     type: "Boolean"
                 }
             ],
@@ -268,7 +268,7 @@ config.iota = {
             type: "Device",
             mappings: [
                 {
-                    ocb_id: "Clock_0.5Hz",
+                    ocb_id: "Clock05Hz",
                     opcua_id: "ns=4;i=23",
                     object_id: "ns=4;i=23",
                     inputArguments: []
@@ -280,43 +280,43 @@ config.iota = {
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Step_data_out",
+                    ocb_id: "StepDataOut",
                     opcua_id: "ns=4;i=3",
                     object_id: "ns=4;i=3",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "State_bits",
+                    ocb_id: "StateBits",
                     opcua_id: "ns=4;i=4",
                     object_id: "ns=4;i=4",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Ready_flag",
+                    ocb_id: "ReadyFlag",
                     opcua_id: "ns=4;i=5",
                     object_id: "ns=4;i=5",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Current_position",
+                    ocb_id: "CurrentPosition",
                     opcua_id: "ns=4;i=6",
                     object_id: "ns=4;i=6",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Current_speed",
+                    ocb_id: "CurrentSpeed",
                     opcua_id: "ns=4;i=7",
                     object_id: "ns=4;i=7",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Pushing_force",
+                    ocb_id: "PushingForce",
                     opcua_id: "ns=4;i=8",
                     object_id: "ns=4;i=8",
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Target_position1",
+                    ocb_id: "TargetPosition1",
                     opcua_id: "ns=4;i=9",
                     object_id: "ns=4;i=9",
                     inputArguments: []
@@ -394,7 +394,7 @@ config.iota = {
                     inputArguments: []
                 },
                 {
-                    ocb_id: "Search_0",
+                    ocb_id: "Search0",
                     opcua_id: "ns=4;i=22",
                     object_id: "ns=4;i=22",
                     inputArguments: []
