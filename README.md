@@ -28,7 +28,7 @@ PoC of all-in-one data management platform that collect and visualize data comin
 For a more complete description on how to configure the IoTAgent, go to <a href="https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/howto.md">IotAgent OPCUA how-to</a>
 
 <br>
-<code>If any change is made to the mapping configuration, edit the subscription configuration of QuantumLeap accordingly going to conf/quantumleap/subscription/subscription-ld.yaml</code>
+<code>If any change is made to the mapping configuration, edit the subscription configuration of QuantumLeap accordingly, going to conf/quantumleap/subscription/subscription-ld.yaml</code>
 
 <h3>Build & Run containers:</h3>
 
