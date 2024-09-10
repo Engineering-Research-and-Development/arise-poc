@@ -41,7 +41,7 @@ services:
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/cartif"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://MPISTONEW1.ITALY.ITROOT.ADNET:4840/cartif"
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
