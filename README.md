@@ -97,7 +97,7 @@ In Grafana the PostgreSQL Datasource is configured using the  datasources.yaml f
 ![alt text](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true)
 
 #### Configuring a Dashboard
-To display a new dashboard, you can either click the + button and select Dashboard or go directly to http://localhost:3003/dashboard/new?orgId=1. Thereafter, click Add Query.
+To display a new dashboard, you can either click the + button and select Dashboard or go directly to http://localhost:3000/dashboard/new?orgId=1. Thereafter, click Add Query.
 Clicking the new Dashboard, you can select the Data Source, the table, the column, any types of data aggregations and the type of chart to represent the selected attribute as shown in the figure
 
 ![JNew Dashboard in Grafana](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Dashboard_Configuration.png?raw=true)
