@@ -9,8 +9,9 @@ The ARISE PoC solution is created using Docker containers that packages up code 
 
 This is a step-by-step tutorial that will introduce in detail how to enable ARISE PoC connecting different information sources as OPC UA devices with which to test several UCs originated by the TEFs.
 
-
+<center>
 ![ARISE-Schema](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE-Schema.png)
+</center>
 
 ## Actors
 
