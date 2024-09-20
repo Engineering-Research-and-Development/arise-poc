@@ -111,7 +111,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT  alarm As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 2000;",
+          "rawSql": "SELECT  alarm As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
           "refId": "D",
           "sql": {
             "columns": [
@@ -137,7 +137,7 @@
     },
     {
       "datasource": {
-        "default": true,
+        "default": false,
         "type": "grafana-postgresql-datasource",
         "uid": "P6122266B226B95A4"
       },
@@ -189,21 +189,27 @@
           ],
           "show": false
         },
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "time"
+          }
+        ]
       },
       "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6122266B226B95A4"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT  AREA As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 2000;",
-          "refId": "D",
+          "rawSql": "SELECT  AREA As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"",
+          "refId": "A",
           "sql": {
             "columns": [
               {
@@ -371,7 +377,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 2000;",
+          "rawSql": "SELECT alarm1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
           "refId": "D",
           "sql": {
             "columns": [
@@ -471,7 +477,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "@value"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -503,7 +525,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm2 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 2000;",
+          "rawSql": "SELECT alarm2 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
           "refId": "D",
           "sql": {
             "columns": [
@@ -545,7 +567,7 @@
     },
     {
       "datasource": {
-        "default": true,
+        "default": false,
         "type": "grafana-postgresql-datasource",
         "uid": "P6122266B226B95A4"
       },
@@ -587,7 +609,7 @@
         "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
-            "changeCount"
+            "mean"
           ],
           "fields": "",
           "values": false
@@ -601,14 +623,14 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6122266B226B95A4"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT targetposition1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 100;",
-          "refId": "D",
+          "rawSql": "SELECT targetposition1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "refId": "A",
           "sql": {
             "columns": [
               {
@@ -725,7 +747,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "@value"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -757,7 +795,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT stepdataout, time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nLIMIT 2000;",
+          "rawSql": "SELECT stepdataout, time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
           "refId": "D",
           "sql": {
             "columns": [
@@ -805,13 +843,13 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "AriseDashboard",
   "uid": "edw7n9k3jc4cge2",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
