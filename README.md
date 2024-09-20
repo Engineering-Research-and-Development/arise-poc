@@ -43,4 +43,4 @@ For a more complete description on how to configure the IoTAgent, go to <a href=
 
 <br>
 
-For more information you can use the following link
+For more information you can use the following [link](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/ARISE_PoC_Tutorial_Extended.md)
