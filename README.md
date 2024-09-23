@@ -1,10 +1,3 @@
-<style>
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
 
 <h1>ARISE PoC</h1>
 
