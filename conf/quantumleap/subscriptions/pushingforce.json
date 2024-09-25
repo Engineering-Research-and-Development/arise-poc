@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "State_bits"
+      "PushingForce"
     ],
     "notification": {
       "attributes": [
-        "State_bits"
+        "PushingForce"
       ],
       "format": "normalized",
       "endpoint": {

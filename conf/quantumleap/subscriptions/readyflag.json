@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Current_speed"
+      "ReadyFlag"
     ],
     "notification": {
       "attributes": [
-        "Current_speed"
+        "ReadyFlag"
       ],
       "format": "normalized",
       "endpoint": {

@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Search_0"
+      "CurrentPosition"
     ],
     "notification": {
       "attributes": [
-        "Search_0"
+        "CurrentPosition"
       ],
       "format": "normalized",
       "endpoint": {

@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Pushing_force"
+      "TargetPosition1"
     ],
     "notification": {
       "attributes": [
-        "Pushing_force"
+        "TargetPosition1"
       ],
       "format": "normalized",
       "endpoint": {

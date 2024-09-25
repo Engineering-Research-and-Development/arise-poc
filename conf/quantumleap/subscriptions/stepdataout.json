@@ -9,11 +9,11 @@
     }
   ],
   "watchedAttributes": [
-    "Step_data_out"
+    "StepDataOut"
   ],
   "notification": {
     "attributes": [
-      "Step_data_out"
+      "StepDataOut"
     ],
     "format": "normalized",
     "endpoint": {

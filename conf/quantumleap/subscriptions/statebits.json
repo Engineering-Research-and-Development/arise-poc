@@ -9,11 +9,11 @@
       }
     ],
     "watchedAttributes": [
-      "Current_position"
+      "StateBits"
     ],
     "notification": {
       "attributes": [
-        "Current_position"
+        "StateBits"
       ],
       "format": "normalized",
       "endpoint": {

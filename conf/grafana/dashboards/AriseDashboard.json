@@ -111,7 +111,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT  alarm As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "rawSql": "SELECT  alarm As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere alarm is not null;",
           "refId": "D",
           "sql": {
             "columns": [
@@ -137,7 +137,7 @@
     },
     {
       "datasource": {
-        "default": false,
+        "default": true,
         "type": "grafana-postgresql-datasource",
         "uid": "P6122266B226B95A4"
       },
@@ -208,7 +208,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT  AREA As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"",
+          "rawSql": "SELECT area ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere area is not null",
           "refId": "A",
           "sql": {
             "columns": [
@@ -377,12 +377,17 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "rawSql": "SELECT alarm1['@value'] as Value,  time_index \r\nFROM \"mtopcua_cartif\".\"etdevice\" \r\nwhere alarm1 is not null;",
           "refId": "D",
           "sql": {
             "columns": [
               {
-                "parameters": [],
+                "parameters": [
+                  {
+                    "name": "alarm1['@value']",
+                    "type": "functionParameter"
+                  }
+                ],
                 "type": "function"
               }
             ],
@@ -395,7 +400,8 @@
               }
             ],
             "limit": 50
-          }
+          },
+          "table": "etdevice"
         }
       ],
       "title": "Alarm1",
@@ -525,7 +531,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm2 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "rawSql": "SELECT alarm2 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere alarm2 is not null;\r\n",
           "refId": "D",
           "sql": {
             "columns": [
@@ -567,7 +573,7 @@
     },
     {
       "datasource": {
-        "default": false,
+        "default": true,
         "type": "grafana-postgresql-datasource",
         "uid": "P6122266B226B95A4"
       },
@@ -629,7 +635,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT targetposition1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "rawSql": "SELECT targetposition1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere targetposition1 is not null;",
           "refId": "A",
           "sql": {
             "columns": [
@@ -795,7 +801,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT stepdataout, time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\";",
+          "rawSql": "SELECT stepdataout, time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere stepdataout is not null;",
           "refId": "D",
           "sql": {
             "columns": [
@@ -843,13 +849,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "AriseDashboard",
   "uid": "edw7n9k3jc4cge2",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
