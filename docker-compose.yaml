@@ -1,6 +1,6 @@
 services:
   iot-agent:
-    image: iotagent4fiware/iotagent-opcua:2.2.7
+    image: iotagent4fiware/iotagent-opcua:2.2.8
     hostname: iotagent-opcua
     depends_on:
       - mongodb
@@ -74,15 +74,32 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.6.0
+    image: fiware/orion-ld:1.7.0
     hostname: orion
+    privileged: true
+    ipc: host
     depends_on:
       - mongodb
     networks:
       - hostnet
     ports:
       - "1026:1026"
-    command: -dbhost mongodb -logLevel DEBUG # -mongocOnly -forwarding -experimental
+    command: -dbhost mongodb -logLevel DEBUG -wip dds  # -mongocOnly -forwarding -experimental
+    volumes:
+       - ./conf/orionld/config-dds.json:/root/.orionld
+
+  ros2:
+    image: ros2
+    hostname: ros2
+    container_name: ros2
+    privileged: true
+    ipc: host
+    networks:
+      - hostnet
+    environment:
+      DISPLAY: ":0.0"
+    volumes:
+       - /tmp/.X11-unix:/tmp/.X11-unix
 
   crate-db:
     image: crate:5.6.5

@@ -1,0 +1,29 @@
+{
+  "type": "Subscription",
+  "name": "Robot-Subscription",
+  "description": "Robot subscription",
+  "entities": [
+    {
+      "id": "urn:ngsi-ld:robot:1",
+      "type": "Robot"
+    }
+  ],
+  "watchedAttributes": [
+    "velocityCommand",
+    "pose"
+  ],
+  "notification": {
+    "attributes": [
+      "velocityCommand",
+      "pose"
+    ],
+    "format": "normalized",
+    "endpoint": {
+      "uri": "http://quantumleap:8668/v2/notify",
+      "accept": "application/json"
+    }
+  },
+  "throttling": 0,
+  "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+}
+
