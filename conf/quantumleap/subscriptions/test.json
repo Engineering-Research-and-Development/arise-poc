@@ -1,0 +1,15 @@
+{
+    "id": "urn:s1",
+    "type": "Subscription",
+    "entities": [
+      {
+        "type": "Robot"
+      }
+    ],
+    "notification": {
+      "endpoint": {
+        "uri": "http://quantumleap:8668/v2/notify"
+      }
+    },
+    "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+}
