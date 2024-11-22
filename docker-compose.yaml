@@ -74,7 +74,7 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.7.0
+    image: fiware/orion-ld:1.8.0-PRE-1644
     hostname: orion
     privileged: true
     ipc: host
@@ -84,7 +84,7 @@ services:
       - hostnet
     ports:
       - "1026:1026"
-    command: -dbhost mongodb -logLevel DEBUG -wip dds  # -mongocOnly -forwarding -experimental
+    command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
     volumes:
        - ./conf/orionld/config-dds.json:/root/.orionld
 
