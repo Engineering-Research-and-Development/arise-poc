@@ -74,7 +74,7 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.8.0-PRE-1644
+    image: fiware/orion-ld:1.8.0-PRE-1645
     hostname: orion
     privileged: true
     ipc: host
