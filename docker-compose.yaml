@@ -154,8 +154,6 @@ services:
       - hostnet
     ports:
       - 3000:3000  
-    depends_on:
-      - crate-db
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
      
