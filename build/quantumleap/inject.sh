@@ -36,12 +36,12 @@ LOOPS=15
 while [ "$crate_status" -ne 200 ]; do
 
     echo "
-    ========================================================
+========================================================
 
-    Waiting for CrateDB to start..
+Waiting for CrateDB to start..
 
-    ========================================================
-    "
+========================================================
+"
 
     sleep 15
     let LOOPS--
@@ -77,11 +77,11 @@ LOOPS=15
 while [ "$orion_status" -ne 200 ]; do
 
     echo "
-    ========================================================
+========================================================
 
-    Waiting for Orion-LD to start..
+Waiting for Orion-LD to start..
 
-    ========================================================
+========================================================
     "
 
     sleep 15
@@ -110,18 +110,31 @@ Sending the subscription request..
 
 ========================================================
 "
+subscription_dir="/src/ngsi-timeseries-api/src/subscriptions"
 
-subscription_file="/src/ngsi-timeseries-api/src/subscription-ld.json"
+for subscription_file in "$subscription_dir"/*.json; do
+    if [ -e "$subscription_file" ]; then
+        tenant=$(jq -r '.notification.endpoint.receiverInfo[] | select(.key == "fiware-service") | .value' "$subscription_file")
+    
+        subscription_status=$(curl -s -L -o /dev/null -w "%{http_code}" -X POST 'http://orion:1026/ngsi-ld/v1/subscriptions/' \
+        -H 'Content-Type: application/ld+json' \
+        -H "NGSILD-Tenant: $tenant" \
+        -d @"$subscription_file")
 
-if [ -e "$subscription_file" ]; then
-    tenant=$(jq -r '.notification.endpoint.receiverInfo[] | select(.key == "fiware-service") | .value' "$subscription_file")
-   
-    curl -L -X POST 'http://orion:1026/ngsi-ld/v1/subscriptions/' \
-    -H 'Content-Type: application/ld+json' \
-    -H "NGSILD-Tenant: $tenant" \
-    -d @"$subscription_file"
-else
-    echo 'The subscription file has not been found :( :('
-    exit 1
-fi
+        if [ "$subscription_status" -ne 201 ] ; then
+            echo 'Subscription could not be sent :( :('
+            exit 1
+        else
+            echo "
+========================================================
 
+Subscription sent successfully!
+
+========================================================
+            "
+        fi
+    else
+        echo 'The subscription file could not be find :( :('
+        exit 1
+    fi
+done
