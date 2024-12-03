@@ -24,14 +24,14 @@ services:
       - "IOTA_CB_PORT=1026"
       - "IOTA_CB_NGSIVERSION=ld"
       - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-      - "IOTA_CB_SERVICE=opcua_server"
+      - "IOTA_CB_SERVICE=opcua_cartif"
       - "IOTA_CB_SUBSERVICE=/demo"
       - "IOTA_NORTH_PORT=4041"
       - "IOTA_REGISTRY_TYPE=mongodb"
       - "IOTA_MONGO_HOST=mongodb"
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
-      - "IOTA_SERVICE=opcua_server"
+      - "IOTA_SERVICE=opcua_cartif"
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -41,7 +41,7 @@ services:
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/cartif"
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
@@ -59,6 +59,7 @@ services:
       - "IOTA_OPCUA_MT_ENTITY_TYPE=Device"
       - "IOTA_OPCUA_MT_NAMESPACE_IGNORE=0,7"
       - "IOTA_OPCUA_MT_STORE_OUTPUT=true"
+    command: sh -c "sleep 15 && node /opt/iotagent-opcua/bin/iotagent-opcua"
     volumes:
       - ./conf/iotagent-opcua:/opt/iotagent-opcua/conf
 
@@ -72,39 +73,35 @@ services:
     command: --bind_ip_all 
     volumes:
       - mongodb:/data
+    healthcheck:
+      test: |
+        host=`hostname --ip-address || echo '127.0.0.1'`;
+        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+      interval: 30s
 
   orion:
-    image: fiware/orion-ld:1.8.0-PRE-1646
+    image: fiware/orion-ld:1.4.0
     hostname: orion
-    privileged: true
-    ipc: host
     depends_on:
       - mongodb
+      - timescale
     networks:
       - hostnet
     ports:
       - "1026:1026"
     restart: always
-    command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
-    volumes:
-       - ./conf/orionld/config-dds.json:/root/.orionld
+    environment:
+      - ORIONLD_TROE=TRUE
+      - ORIONLD_TROE_HOST=timescale
+      - ORIONLD_TROE_PORT=5432
+      - ORIONLD_TROE_USER=orion
+      - ORIONLD_TROE_PWD=orion
+      - ORIONLD_MONGO_HOST=mongodb
+    command: -logLevel DEBUG -mongocOnly
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
       interval: 30s
       retries: 15
-
-  ros2:
-    image: ros2
-    hostname: ros2
-    container_name: ros2
-    privileged: true
-    ipc: host
-    networks:
-      - hostnet
-    environment:
-      DISPLAY: ":0.0"
-    volumes:
-       - /tmp/.X11-unix:/tmp/.X11-unix
 
   timescale:
     image: timescale/timescaledb-postgis:1.7.5-pg12
@@ -145,7 +142,6 @@ services:
       - DATASOURCES_DEFAULT_PASSWORD=orion
       - DATASOURCES_DEFAULT_DATABASE=orion
       - LOGGERS_LEVELS_ROOT=DEBUG
-      - ./conf/quantumleap/subscriptions:/src/ngsi-timeseries-api/src/subscriptions
 
   grafana:
     image: grafana/grafana:latest
@@ -155,17 +151,14 @@ services:
     ports:
       - 3000:3000  
     depends_on:
-      - crate-db
+      - timescale
     environment:
-      - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
-     
+      - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource 
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
       - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
 
-  
 volumes:
   mongodb: ~
 

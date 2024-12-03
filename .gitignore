@@ -1,1 +1,2 @@
 docker-compose-dev.yaml
+build/cartif_opcua_test_server
