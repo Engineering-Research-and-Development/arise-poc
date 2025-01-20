@@ -3,11 +3,10 @@
 
 https://arise-middleware.eu/
 
-<br>
 
 PoC of an all-in-one data management platform that collects and visualizes data from an OPC UA server.
 
-![ARISE PoC Schema](./docs/images/ARISE-Schema.png "ARISE PoC Schema")
+![ARISE PoC Schema](./docs/images/ARISE-Schema-v2.png)
 
 <h2>Requirements</h2>
 <ul>
@@ -20,21 +19,38 @@ PoC of an all-in-one data management platform that collects and visualizes data 
 
 <h2>How to run</h2>
 <h3>Download the repository:</h3>
-<code>git clone https://github.com/Engineering-Research-and-Development/arise-poc.git</code>
+
+```
+git clone https://github.com/Engineering-Research-and-Development/arise-poc.git
+```
 
 <h3>Configure the platform</h3>
 Edit the <b>docker-compose.yaml</b> file and configure iotagent-opcua according to your OPC UA Server specifications.
 <br><br>
 For a more complete description on how to configure the IoTAgent, go to <a href="https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/howto.md">IotAgent OPCUA how-to guide.</a>
 
-<br>
-If any change is made to the mapping configuration, edit the subscription configuration of QuantumLeap accordingly, going to conf/quantumleap/subscription/subscription-ld.yaml
-
 <h3>Build & Run containers:</h3>
 
-<code>docker-compose up --build -d</code>
+```
+docker-compose up --build -d
+```
 
-<br>
+When the dockers have started, connect to bash in the container of ros2:
+```
+docker exec -ti ros2 bash
+```
+
+Now the TurtleSim and the Keyboard controller can be started:
+
+```
+source /ros2-ws/install/setup.bash
+
+# Show the turtles on the screen
+ros2 run docs_turtlesim turtlesim_node_keys &
+
+# Keyboard controller to move the turtles.
+ros2 run docs_turtlesim turtlesim_multi_control 
+```
 
 <h3>Access the UIs</h3>
 

@@ -74,7 +74,7 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.8.0-PRE-1645
+    image: fiware/orion-ld:1.8.0-PRE-1646
     hostname: orion
     privileged: true
     ipc: host
@@ -84,9 +84,14 @@ services:
       - hostnet
     ports:
       - "1026:1026"
+    restart: always
     command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
     volumes:
        - ./conf/orionld/config-dds.json:/root/.orionld
+    healthcheck:
+      test: curl --fail -s http://orion:1026/version || exit 1
+      interval: 30s
+      retries: 15
 
   ros2:
     image: ros2
@@ -101,34 +106,45 @@ services:
     volumes:
        - /tmp/.X11-unix:/tmp/.X11-unix
 
-  crate-db:
-    image: crate:5.6.5
-    hostname: crate-db
+  timescale:
+    image: timescale/timescaledb-postgis:1.7.5-pg12
+    hostname: timescale
     networks:
       - hostnet
     ports:
-      - "4200:4200"
-      - "4300:4300"
-      - "5432:5432"
-    command:
-      crate -Cdiscovery.type=single-node -Chttp.cors.allow-origin="*"
+      - "5432:5432"  
     environment:
-      - CRATE_HEAP_SIZE=2g
+      - POSTGRES_USER=orion
+      - POSTGRES_PASSWORD=orion
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    command: ["postgres", "-c", "log_statement=all"]
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U orion" ]
+      interval: 15s
+      timeout: 15s
+      retries: 5
+      start_period: 60s
 
-  quantumleap:
-    build: ./build/quantumleap
-    hostname: quantumleap
+  mintaka:
+    image: fiware/mintaka:0.4.3
+    hostname: mintaka
+    restart: always
     networks:
-      - hostnet
+      - hostnet 
     ports:
-      - "8668:8668"
-    depends_on:
-      - crate-db
+      - "8080:8080"
     environment:
-      - CRATE_HOST=crate-db
-      - AUTOMATIC_SUBSCRIPTION=true
-    volumes:
-      - ./conf/quantumleap/subscriptions:/src/ngsi-timeseries-api/src/subscriptions
+      - MICRONAUT_SERVER_PORT=8080
+      - MICRONAUT_METRICS_ENABLED=true
+      - ENDPOINTS_ALL_PORT=8080
+      - ENDPOINTS_METRICS_ENABLED=true
+      - ENDPOINTS_HEALTH_ENABLED=true
+      - DATASOURCES_DEFAULT_HOST=timescale
+      - DATASOURCES_DEFAULT_PORT=5432
+      - DATASOURCES_DEFAULT_USERNAME=orion
+      - DATASOURCES_DEFAULT_PASSWORD=orion
+      - DATASOURCES_DEFAULT_DATABASE=orion
+      - LOGGERS_LEVELS_ROOT=DEBUG
 
   grafana:
     image: grafana/grafana:latest
@@ -137,11 +153,8 @@ services:
       - hostnet
     ports:
       - 3000:3000  
-    depends_on:
-      - crate-db
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
-     
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources

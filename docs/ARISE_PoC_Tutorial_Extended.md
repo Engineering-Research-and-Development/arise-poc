@@ -10,7 +10,7 @@ The ARISE PoC solution is created using Docker containers that packages up code 
 This is a step-by-step tutorial that will introduce in detail how to enable ARISE PoC connecting different information sources as OPC UA devices with which to test several UCs originated by the TEFs.
 
 
-![ARISE-Schema](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE-Schema.png)
+![ARISE PoC Schema](../docs/images/ARISE-Schema-v2.png)
 
 ## Actors
 
@@ -24,9 +24,9 @@ available in _conf_ folder.
 -   **Orion LD Context Broker**, the broker as entry point of FIWARE platform using NGSI LD data model. Orion LD Context Broker can be external, however to have a black box for testing, it will be included in docker compose in
 order to have a self-supporting environment.
 -   **MongoDB**, the database that saves the current state of the data passed through the OCB. It is used by the Orion LD Context Broker to hold context data information such as data entities, subscriptions and registrations. 
--   **Quantum Leap**, this GE  is a REST service for storing, querying and retrieving  NGSI-LD  spatial-temporal data. It is subscribed to the Fiware Orion LD Context Broker for each of the OPC UA data monitored. QuantumLeap supports the storage of FIWARE NGSI LD data into a time series database. More information about the GE can be found in the [user guide](https://github.com/FIWARE-GEs/quantum-leap)
--   **CrateDB**, persists all OPCUA server data, subscribed via Quantum Leap GE. It used as a data sink to hold time-based historical context data, also it offers an HTTP endpoint to interpret time-based data queries. CrateDB offers an HTTP Endpoint that can be used to submit SQL queries. The endpoint is accessible under <servername:port>/_sql. The Admin UI is available on port 4200, while the transport protocol is available on port 4300
--   **Grafana**, visualize data stored in CrateDB, using user-defined dashboards.Grafana is an open source software for time series analytics tool which will be used during this tutorial. It integrates with a variety of time-series databases including CrateDB. It is available licensed under the Apache License 2.0. More information can be found at https://grafana.com/.
+-   **Mintaka**, The GE Mintaka is a Generic Enabler (GE) of the FIWARE ecosystem designed for time series data storage and management. It serves as a lightweight, scalable API that allows the ingestion, querying, and analysis of historical context information from FIWARE Context Brokers. More information can be found [here](https://github.com/FIWARE/mintaka/blob/main/README.md).
+-   **TimescaleDB**,  is a time series database built on PostgreSQL, designed to handle large-scale, time-stamped data efficiently. It offers powerful SQL support for managing time series data, with features like automatic data partitioning, real-time aggregation, and advanced query capabilities. More information can be found [here](https://docs.timescale.com/).
+-   **Grafana**, visualize data stored in CrateDB, using user-defined dashboards.Grafana is an open source software for time series analytics tool which will be used during this tutorial. It integrates with a variety of time-series databases including CrateDB. It is available licensed under the Apache License 2.0. More information can be found [here](https://grafana.com/).
 
 
 
@@ -83,8 +83,24 @@ After that you can run:
 docker ps
 ```
 
-to check if all the required components are running
-![Containers Image](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Containers.png)
+to check if all the required components are running.
+
+When the dockers have started, connect to bash in the container of ros2:
+```
+docker exec -ti ros2 bash
+```
+
+Now the TurtleSim and the Keyboard controller can be started:
+
+```
+source /ros2-ws/install/setup.bash
+
+# Show the turtles on the screen
+ros2 run docs_turtlesim turtlesim_node_keys &
+
+# Keyboard controller to move the turtles.
+ros2 run docs_turtlesim turtlesim_multi_control 
+```
 
 #### Step 4 - Access the Grafana Dashboard / CrateDB
 The UI part of the ARISE PoC is defined using Grafana that is an open source software for time series analytics tool which will be used during this tutorial. It integrates with a variety of time-series databases including CrateDB. It is available licensed under the Apache License 2.0. More information can be found at https://grafana.com/.
@@ -99,20 +115,20 @@ cd arise-poc\conf\grafana\datasources
 nano datasources.yaml
 ```
 
-![Datasource.yaml](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true)
+![Datasource.yaml](../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true)
 
 #### Configuring a Dashboard
 To display a new dashboard, you can either click the + button and select Dashboard or go directly to http://localhost:3000/dashboard/new?orgId=1. Thereafter, click Add Query.
 Clicking the new Dashboard, you can select the Data Source, the table, the column, any types of data aggregations and the type of chart to represent the selected attribute as shown in the figure
 
-![New Dashboard in Grafana](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Dashboard_Configuration.png?raw=true)
+![New Dashboard in Grafana](../docs/images/ARISE_PoC_Grafana_Dashboard_Configuration.png)
 
 In ARISE PoC, Dashboards based on the OPCUA device of the TEF1 of Cartif are defined, as shown in the figure. 
-![Select Dashboard Default](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Dashboard_deafult.png?raw=true)
+![Select Dashboard Default](../docs/images/ARISE_PoC_Grafana_Dashboard_deafult.png)
 
-![Dashboard TEF1-Cartif](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_PoC_Grafana_Dashboard_Example.png?raw=true)
+![Dashboard TEF1-Cartif](../docs/images/ARISE_PoC_Grafana_Dashboard_Example.png)
 
-
+![Dashboard TurtleSim](../docs/images/ARISE_PoC_Turtle_Dashboard.png)
 
 
 ## Appendices
@@ -402,7 +418,7 @@ Modifying this file you can:
 ```yaml
 services:
   iot-agent:
-    image: iotagent4fiware/iotagent-opcua:2.2.7
+    image: iotagent4fiware/iotagent-opcua:2.2.8
     hostname: iotagent-opcua
     depends_on:
       - mongodb
@@ -426,14 +442,14 @@ services:
       - "IOTA_CB_PORT=1026"
       - "IOTA_CB_NGSIVERSION=ld"
       - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-      - "IOTA_CB_SERVICE=opcua_car"
+      - "IOTA_CB_SERVICE=opcua_server"
       - "IOTA_CB_SUBSERVICE=/demo"
       - "IOTA_NORTH_PORT=4041"
       - "IOTA_REGISTRY_TYPE=mongodb"
       - "IOTA_MONGO_HOST=mongodb"
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
-      - "IOTA_SERVICE=opcua_car"
+      - "IOTA_SERVICE=opcua_server"
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -443,9 +459,11 @@ services:
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/cartif"
-      - "IOTA_OPCUA_SECURITY_MODE=None" 
-      - "IOTA_OPCUA_SECURITY_POLICY=None"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
+      - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
+      - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
+      # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
+      # - "IOTA_OPCUA_SECURITY_PASSWORD=test"
       - "IOTA_OPCUA_UNIQUE_SUBSCRIPTION=false"
       - "IOTA_OPCUA_SUBSCRIPTION_NOTIFICATIONS_PER_PUBLISH=1000"
       - "IOTA_OPCUA_SUBSCRIPTION_PUBLISHING_ENABLED=true"
@@ -463,7 +481,7 @@ services:
       - ./conf/iotagent-opcua:/opt/iotagent-opcua/conf
 
   mongodb:
-    image: mongo:4.4 
+    image: mongo:4.4 #latest
     hostname: mongodb
     networks:
       - hostnet
@@ -474,44 +492,77 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.6.0
+    image: fiware/orion-ld:1.8.0-PRE-1646
     hostname: orion
+    privileged: true
+    ipc: host
     depends_on:
       - mongodb
     networks:
       - hostnet
     ports:
       - "1026:1026"
-    command: -dbhost mongodb -logLevel DEBUG 
-
-  crate-db:
-    image: crate:4.1.4
-    hostname: crate-db
-    networks:
-      - hostnet
-    ports:
-      - "4200:4200"
-      - "4300:4300"
-      - "5432:5432"
-    command:
-      crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
-    environment:
-      - CRATE_HEAP_SIZE=2g
-
-  quantumleap:
-    build: ./build/quantumleap
-    hostname: quantumleap
-    networks:
-      - hostnet
-    ports:
-      - "8668:8668"
-    depends_on:
-      - crate-db
-    environment:
-      - CRATE_HOST=crate-db
-      - AUTOMATIC_SUBSCRIPTION=true
+    restart: always
+    command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
     volumes:
-      - ./conf/quantumleap/subscription-ld.json:/src/ngsi-timeseries-api/src/subscription-ld.json
+       - ./conf/orionld/config-dds.json:/root/.orionld
+    healthcheck:
+      test: curl --fail -s http://orion:1026/version || exit 1
+      interval: 30s
+      retries: 15
+
+  ros2:
+    image: ros2
+    hostname: ros2
+    container_name: ros2
+    privileged: true
+    ipc: host
+    networks:
+      - hostnet
+    environment:
+      DISPLAY: ":0.0"
+    volumes:
+       - /tmp/.X11-unix:/tmp/.X11-unix
+
+  timescale:
+    image: timescale/timescaledb-postgis:1.7.5-pg12
+    hostname: timescale
+    networks:
+      - hostnet
+    ports:
+      - "5432:5432"  
+    environment:
+      - POSTGRES_USER=orion
+      - POSTGRES_PASSWORD=orion
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    command: ["postgres", "-c", "log_statement=all"]
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U orion" ]
+      interval: 15s
+      timeout: 15s
+      retries: 5
+      start_period: 60s
+
+  mintaka:
+    image: fiware/mintaka:0.4.3
+    hostname: mintaka
+    restart: always
+    networks:
+      - hostnet 
+    ports:
+      - "8080:8080"
+    environment:
+      - MICRONAUT_SERVER_PORT=8080
+      - MICRONAUT_METRICS_ENABLED=true
+      - ENDPOINTS_ALL_PORT=8080
+      - ENDPOINTS_METRICS_ENABLED=true
+      - ENDPOINTS_HEALTH_ENABLED=true
+      - DATASOURCES_DEFAULT_HOST=timescale
+      - DATASOURCES_DEFAULT_PORT=5432
+      - DATASOURCES_DEFAULT_USERNAME=orion
+      - DATASOURCES_DEFAULT_PASSWORD=orion
+      - DATASOURCES_DEFAULT_DATABASE=orion
+      - LOGGERS_LEVELS_ROOT=DEBUG
 
   grafana:
     image: grafana/grafana:latest
@@ -520,13 +571,12 @@ services:
       - hostnet
     ports:
       - 3000:3000  
-    depends_on:
-      - crate-db
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
       - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
 
   
