@@ -86,6 +86,13 @@ services:
       - "1026:1026"
     restart: always
     command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
+    environment:
+      - ORIONLD_TROE=TRUE
+      - ORIONLD_TROE_HOST=timescale
+      - ORIONLD_TROE_PORT=5432
+      - ORIONLD_TROE_USER=orion
+      - ORIONLD_TROE_PWD=orion
+      - ORIONLD_MONGO_HOST=mongodb
     volumes:
        - ./conf/orionld/config-dds.json:/root/.orionld
     healthcheck:
