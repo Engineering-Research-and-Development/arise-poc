@@ -32,7 +32,16 @@ For a more complete description on how to configure the IoTAgent, go to <a href=
 <h3>Build & Run containers:</h3>
 
 ```
-docker-compose up --build -d
+docker compose up --build -d
+```
+
+## Starting the demo
+Before starting the demo, as X11 session owners, other users must be allowed to use the X Window System (to show the
+turtles on screen).
+For that, the following command is executed:
+
+```
+xhost local:root
 ```
 
 When the dockers have started, connect to bash in the container of ros2:
