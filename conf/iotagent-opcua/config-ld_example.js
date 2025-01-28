@@ -41,7 +41,7 @@ config.iota = {
         /**
          * Host where the Context Broker is located.
          */
-        host: 'localhost',
+        host: 'orion',
         /**
          * Port where the Context Broker is listening.
          */
@@ -49,7 +49,7 @@ config.iota = {
         /**
          * Version of the Context Broker (v2 or ld)
          */
-        ngsiVersion: 'v2',
+        ngsiVersion: 'ld',
         /**
          * JSON LD Context
          */
@@ -140,7 +140,7 @@ config.iota = {
          * Host where MongoDB is located. If the MongoDB used is a replicaSet, this property will contain a
          * comma-separated list of the instance names or IPs.
          */
-        host: 'localhost',
+        host: 'mongodb',
         /**
          * Port where MongoDB is listening. In the case of a replicaSet, all the instances are supposed to be listening
          * in the same port.
@@ -439,7 +439,7 @@ config.iota = {
      * URL Where the IoT Agent Will listen for incoming updateContext and queryContext requests (for commands and
      * passive attributes). This URL will be sent in the Context Registration requests.
      */
-    providerUrl: 'http://localhost:4041',
+    providerUrl: 'http://iotagent_opcua:4041',
     /**
      * Default maximum expire date for device registrations.
      */
@@ -487,7 +487,7 @@ config.opcua = {
     /**
      * Endpoint where the IoT Agent will listen for an active OPC UA Server.
      */
-    endpoint: 'opc.tcp://0.0.0.0:4840/cartif',
+    endpoint: 'opc.tcp:/host.docker.internal:4840/cartif',
     /**
      * Security Mode to access OPC UA Server.
      */

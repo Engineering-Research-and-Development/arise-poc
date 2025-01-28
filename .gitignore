@@ -1,4 +1,4 @@
 docker-compose-experimental.yaml
 conf/iotagent-opcua/config_mapping_tool.json
 conf/iotagent-opcua/*.bkp
-build/cartif_opcua_test_server
+build/cartif_opcua_test_server/node_modules

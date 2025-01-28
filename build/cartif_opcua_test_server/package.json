@@ -1,0 +1,20 @@
+{
+    "name": "opcua-server",
+    "version": "1.0.0",
+    "description": "OPC UA server example using node-opcua",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "keywords": [
+      "opcua",
+      "node-opcua",
+      "server"
+    ],
+    "author": "Manfredi Pistone",
+    "license": "MIT",
+    "dependencies": {
+      "node-opcua": "^2.54.0"
+    }
+  }
+  

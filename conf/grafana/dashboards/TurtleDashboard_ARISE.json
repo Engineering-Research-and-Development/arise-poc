@@ -18,13 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -34,7 +34,7 @@
           "custom": {
             "axisBorderShow": true,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
@@ -49,13 +49,13 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 3,
-            "pointSize": 5,
+            "lineWidth": 4,
+            "pointSize": 8,
             "scaleDistribution": {
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -79,7 +79,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pose Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -100,13 +116,13 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,pose['linear_velocity'] as \"Velocity Linear Pose\",pose['x'] as \"Pose x\",pose['y'] as \"Pose y\",pose['theta'] as \"Pose theta\",pose['angular_velocity'] as \"Pose Angular Velocity\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=1 ",
+          "rawSql": "SELECT CAST(jsonb_path_query(compound,'$.x')as REAL) AS \"Pose X\",\nCAST(jsonb_path_query(compound,'$.y') as REAL) AS \"Pose Y\",\nCAST(jsonb_path_query(compound,'$.theta') as REAL)as \"Pose Theta\",\nCAST(jsonb_path_query(compound,'$.linear_velocity') as REAL ) as \"Pose Linear Velocity\",\nCAST(jsonb_path_query(compound,'$.angular_velocity') as REAL ) as \"Pose Angular velocity\", \na.ts FROM public.\"attributes\" AS a where a.id like '%pose'and   compound->>'turtle_id' = '1';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -133,7 +149,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -188,7 +204,48 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Velocity Linear Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Velocity Linear Z",
+                  "Velocity Linear X"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -209,7 +266,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -219,7 +276,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['linear']['x'] as \"Velocity Linear X\", velocitycommand['linear']['y'] as \"Velocity Linear Y\", velocitycommand['linear']['z'] as \"Velocity Linear Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=1",
+          "rawSql": "SELECT \nCAST(a.compound->'linear'->>'x' as INTEGER) as \"Velocity Linear X\",\nCAST(a.compound->'linear'->>'y' as INTEGER) as \"Velocity Linear Y\",\nCAST(a.compound->'linear'->>'z' as INTEGER)as \"Velocity Linear Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '1';",
           "refId": "A",
           "sql": {
             "columns": [
@@ -246,7 +303,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -304,7 +361,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Velocity Angular Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -325,7 +398,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -335,7 +408,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['angular']['x'] as \"Velocity Angular X\", velocitycommand['angular']['y'] as \"Velocity Angular Y\", velocitycommand['angular']['z'] as \"Velocity Angular Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=1",
+          "rawSql": "select \nCAST(a.compound->'angular'->>'x' as INTEGER)as \"Velocity Angular X\",\nCAST(a.compound->'angular'->>'y' as INTEGER)as \"Velocity Angular Y\",\nCAST(a.compound->'angular'->>'z' as INTEGER)as \"Velocity Angular Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '1';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -362,7 +435,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -420,7 +493,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pose Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -441,7 +530,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -451,7 +540,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,pose['linear_velocity'] as \"Velocity Linear Pose\",pose['x'] as \"Pose x\",pose['y'] as \"Pose y\",pose['theta'] as \"Pose theta\",pose['angular_velocity'] as \"Pose Angular Velocity\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=2 ",
+          "rawSql": "SELECT CAST(jsonb_path_query(compound,'$.x')as REAL) AS \"Pose X\",\nCAST(jsonb_path_query(compound,'$.y') as REAL) AS \"Pose Y\",\nCAST(jsonb_path_query(compound,'$.theta') as REAL)as \"Pose Theta\",\nCAST(jsonb_path_query(compound,'$.linear_velocity') as REAL ) as \"Pose Linear Velocity\",\nCAST(jsonb_path_query(compound,'$.angular_velocity') as REAL ) as \"Pose Angular velocity\", \na.ts FROM public.\"attributes\" AS a where a.id like '%pose'and   compound->>'turtle_id' = '2';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -478,7 +567,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -554,7 +643,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -564,7 +653,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['linear']['x'] as \"Velocity Linear X\", velocitycommand['linear']['y'] as \"Velocity Linear Y\", velocitycommand['linear']['z'] as \"Velocity Linear Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=2",
+          "rawSql": "SELECT \nCAST(a.compound->'linear'->>'x' as INTEGER) as \"Velocity Linear X\",\nCAST(a.compound->'linear'->>'y' as INTEGER) as \"Velocity Linear Y\",\nCAST(a.compound->'linear'->>'z' as INTEGER)as \"Velocity Linear Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '2';",
           "refId": "A",
           "sql": {
             "columns": [
@@ -591,7 +680,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -649,7 +738,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Velocity Angular Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -670,7 +775,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -680,7 +785,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['linear']['x'] as \"Velocity Linear X\", velocitycommand['linear']['y'] as \"Velocity Linear Y\", velocitycommand['linear']['z'] as \"Velocity Linear Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=2 ",
+          "rawSql": "select \nCAST(a.compound->'angular'->>'x' as INTEGER)as \"Velocity Angular X\",\nCAST(a.compound->'angular'->>'y' as INTEGER)as \"Velocity Angular Y\",\nCAST(a.compound->'angular'->>'z' as INTEGER)as \"Velocity Angular Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '2';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -707,7 +812,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -762,7 +867,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pose Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -783,7 +904,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -793,7 +914,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,pose['linear_velocity'] as \"Velocity Linear Pose\",pose['x'] as \"Pose x\",pose['y'] as \"Pose y\",pose['theta'] as \"Pose theta\",pose['angular_velocity'] as \"Pose Angular Velocity\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=3 ",
+          "rawSql": "SELECT CAST(jsonb_path_query(compound,'$.x')as REAL) AS \"Pose X\",\nCAST(jsonb_path_query(compound,'$.y') as REAL) AS \"Pose Y\",\nCAST(jsonb_path_query(compound,'$.theta') as REAL)as \"Pose Theta\",\nCAST(jsonb_path_query(compound,'$.linear_velocity') as REAL ) as \"Pose Linear Velocity\",\nCAST(jsonb_path_query(compound,'$.angular_velocity') as REAL ) as \"Pose Angular velocity\", \na.ts FROM public.\"attributes\" AS a where a.id like '%pose'and   compound->>'turtle_id' = '3';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -820,7 +941,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -896,7 +1017,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -906,7 +1027,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['linear']['x'] as \"Velocity Linear X\", velocitycommand['linear']['y'] as \"Velocity Linear Y\", velocitycommand['linear']['z'] as \"Velocity Linear Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=3",
+          "rawSql": "SELECT \nCAST(a.compound->'linear'->>'x' as INTEGER) as \"Velocity Linear X\",\nCAST(a.compound->'linear'->>'y' as INTEGER) as \"Velocity Linear Y\",\nCAST(a.compound->'linear'->>'z' as INTEGER)as \"Velocity Linear Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '3';",
           "refId": "A",
           "sql": {
             "columns": [
@@ -933,7 +1054,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "P78DC24F8AA21B398"
+        "uid": "PA925617886E8799C"
       },
       "description": "",
       "fieldConfig": {
@@ -989,7 +1110,23 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Velocity Angular Y"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -1010,7 +1147,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.1",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -1020,7 +1157,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT time_index,velocitycommand['linear']['x'] as \"Velocity Linear X\", velocitycommand['linear']['y'] as \"Velocity Linear Y\", velocitycommand['linear']['z'] as \"Velocity Linear Z\"\nFROM \"doc\".\"etrobot\" \nWHERE velocitycommand['turtle_id']=3 ",
+          "rawSql": "select \nCAST(a.compound->'angular'->>'x' as INTEGER)as \"Velocity Angular X\",\nCAST(a.compound->'angular'->>'y' as INTEGER)as \"Velocity Angular Y\",\nCAST(a.compound->'angular'->>'z' as INTEGER)as \"Velocity Angular Z\",\na.ts FROM public.\"attributes\" AS a where a.id like '%velocityCommand' and compound->>'turtle_id' = '3';\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -1049,7 +1186,23 @@
   "schemaVersion": 40,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "PA925617886E8799C"
+        },
+        "filters": [
+          {
+            "key": "Pose Y",
+            "operator": "=",
+            "value": "9.088889"
+          }
+        ],
+        "name": "Filters",
+        "type": "adhoc"
+      }
+    ]
   },
   "time": {
     "from": "2024-11-29T10:56:35.583Z",
