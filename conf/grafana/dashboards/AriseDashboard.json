@@ -18,13 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 2,
   "links": [],
   "panels": [
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -96,11 +96,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -111,7 +112,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT  alarm As Value ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere alarm is not null;",
+          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/SETON'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -132,14 +133,13 @@
           }
         }
       ],
-      "title": "ALARM",
+      "title": "SETON",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -197,7 +197,7 @@
           }
         ]
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -208,7 +208,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT area ,time_index as TIME\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere area is not null",
+          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/AREA'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -283,9 +283,8 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -360,13 +359,14 @@
         "showValue": "auto",
         "stacking": "none",
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -377,7 +377,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm1['@value'] as Value,  time_index \r\nFROM \"mtopcua_cartif\".\"etdevice\" \r\nwhere alarm1 is not null;",
+          "rawSql": "SELECT (compound ->>'@value')::INTEGER AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Compound' and a.id like '%Alarm4'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -404,7 +404,7 @@
           "table": "etdevice"
         }
       ],
-      "title": "Alarm1",
+      "title": "Alarm4",
       "transformations": [
         {
           "id": "extractFields",
@@ -425,9 +425,8 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -516,11 +515,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -531,7 +531,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT alarm2 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere alarm2 is not null;\r\n",
+          "rawSql": "SELECT (compound ->>'@value')::INTEGER AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Compound' and a.id like '%Alarm2'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -573,14 +573,46 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -607,24 +639,19 @@
       },
       "id": 6,
       "options": {
-        "displayMode": "lcd",
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -635,7 +662,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT targetposition1 , time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere targetposition1 is not null;",
+          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/BUSY'",
           "refId": "A",
           "sql": {
             "columns": [
@@ -656,7 +683,7 @@
           }
         }
       ],
-      "title": "Target Position",
+      "title": "BUSY",
       "transformations": [
         {
           "id": "extractFields",
@@ -692,13 +719,12 @@
           }
         }
       ],
-      "type": "bargauge"
+      "type": "timeseries"
     },
     {
       "datasource": {
-        "default": true,
         "type": "grafana-postgresql-datasource",
-        "uid": "P6122266B226B95A4"
+        "uid": "PA925617886E8799C"
       },
       "fieldConfig": {
         "defaults": {
@@ -786,11 +812,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.5.0",
       "targets": [
         {
           "datasource": {
@@ -801,7 +828,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT stepdataout, time_index\r\nFROM \"mtopcua_cartif\".\"etdevice\"\r\nwhere stepdataout is not null;",
+          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/WAREA'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -842,8 +869,9 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
