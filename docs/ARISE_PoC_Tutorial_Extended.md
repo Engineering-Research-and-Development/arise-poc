@@ -11,7 +11,7 @@ This containerized approach simplifies deployment, eliminates dependency conflic
 This tutorial is a step-by-step guide that demonstrates how to set up the necessary components and workflows, in order to enable the ARISE PoC to connect seamlessly with various information sources. It also provides the means to test a wide range of use cases (UCs) defined and implemented in the Test and Experimentation Facilities (TEFs). 
 
 <p align="center">
-  <img src="(../docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
+  <img src="../docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
 </p>
 ## Actors
 
