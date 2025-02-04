@@ -141,23 +141,43 @@ cd arise-poc\conf\grafana\datasources
 nano datasources.yaml
 ```
 
-![Datasource.yaml](../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true)
+<p align="center">
+  <img src="../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true" alt="Datasource.yaml">
+</p>
+
 
 When the ARISE PoC is executed, this datasource.yaml file is mounted into the Grafana's provisioning folder to ensure proper configuration and access to the necessary data sources.
 
 #### Creating a new Dashboard
 Creating a new dashboard in Grafana allows you to visualize and analyze your data effectively. Here's a step-by-step guide to help you set up a new dashboard:
 -Log in Grafana instance and click on the "+" icon in the top right menu, selecting "New Dashboard";
-![Select New Dashboard](../docs/images/newDashboard.png)
+
+<p align="center">
+  <img src="../docs/images/newDashboard.png" alt="Select New Dashboard">
+</p>
+
+
 
 - Click on "Add a new panel" and in the Query section, choose your data source. 
-![Add Visualization](../docs/images/addNewPanel.png)
-![Select DataSSource](../docs/images/selectDatasource.png)
+<p align="center">
+  <img src="../docs/images/addNewPanel.png" alt="Add Visualization">
+</p>
+
+<p align="center">
+  <img src="../docs/images/selectDatasource.png" alt="Select DataSSource">
+</p>
+
 
 - Construct your query to fetch the desired data, selecting the appropriate visualization type (e.g., graph, table, gauge) from the options.
 
-![Insert Query](../docs/images/insert_query.png)
-![Selecting the appropriate visualization type](../docs/images/configure_graph_type.png)
+<p align="center">
+  <img src="../docs/images/insert_query.png" alt="Insert Query">
+</p>
+
+<p align="center">
+  <img src="../docs/images/configure_graph_type.png" alt="Selecting the appropriate visualization type">
+</p>
+
 
 -To configure Panel Settings, you adjust the visualization settings such  axes, legends, and thresholds
 -Save the Panel and the Dashboard
