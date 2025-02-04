@@ -10,9 +10,9 @@ This containerized approach simplifies deployment, eliminates dependency conflic
 
 This tutorial is a step-by-step guide that demonstrates how to set up the necessary components and workflows, in order to enable the ARISE PoC to connect seamlessly with various information sources. It also provides the means to test a wide range of use cases (UCs) defined and implemented in the Test and Experimentation Facilities (TEFs). 
 
-
-![ARISE PoC Schema](../docs/images/ARISE-Schema-v2.png)
-
+<p align="center">
+  <img src="(../docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
+</p>
 ## Actors
 
 The actors involved in the scenario are:
@@ -118,7 +118,9 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 # Keyboard controller to move the turtles.
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
-![TurtleSim View](../docs/images/turtlesim.png)
+<p align="center">
+  <img src="(../docs/images/turtlesim.png" alt="TurtleSim View">
+</p>
 
 #### Step 4 - Access the Grafana Dashboard 
 
