@@ -87,7 +87,7 @@ To launch the whole project:
 docker compose up --build -d
 ```
 
-After that you can run: ****
+After that you can run: 
 
 ```bash
 docker ps
@@ -119,7 +119,7 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
 <p align="center">
-  <img src="(../docs/images/turtlesim.png" alt="TurtleSim View">
+  <img src="../docs/images/turtlesim.png" alt="TurtleSim View">
 </p>
 
 #### Step 4 - Access the Grafana Dashboard 
