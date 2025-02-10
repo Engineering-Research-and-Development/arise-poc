@@ -1188,6 +1188,7 @@
   "templating": {
     "list": [
       {
+        "baseFilters": [],
         "datasource": {
           "type": "grafana-postgresql-datasource",
           "uid": "PA925617886E8799C"

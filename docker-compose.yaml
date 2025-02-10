@@ -25,7 +25,7 @@ services:
       - "IOTA_CB_NGSIVERSION=ld"
       - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
       # - "IOTA_CB_SERVICE=opcua_server"
-      - "IOTA_CB_SERVICE=opcua_cartif"
+      - "IOTA_CB_SERVICE=cartif"
       - "IOTA_CB_SUBSERVICE=/demo"
       - "IOTA_NORTH_PORT=4041"
       - "IOTA_REGISTRY_TYPE=mongodb"
@@ -33,7 +33,7 @@ services:
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
       # - "IOTA_SERVICE=opcua_server"
-      - "IOTA_SERVICE=opcua_cartif"
+      - "IOTA_SERVICE=cartif"
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -44,7 +44,7 @@ services:
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
       # - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_cartif"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://192.168.1.32:4840/cartif"
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
@@ -163,15 +163,20 @@ services:
     networks:
       - hostnet
     ports:
-      - 3000:3000  
+      - 443:3000
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
+      - GF_SERVER_PROTOCOL=https
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_SERVER_CERT_FILE=/etc/grafana/certs/grafana.crt
+      - GF_SERVER_CERT_KEY=/etc/grafana/certs/grafana.key
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
       - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
-
+      - ./conf/grafana/certificates:/etc/grafana/certs 
+    restart: always
   
 volumes:
   mongodb: ~
