@@ -4,35 +4,38 @@
 
 [![FIWARE Banner](https://fiware.github.io/tutorials.IoT-over-MQTT/img/fiware.png)](https://www.fiware.org/developers)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![OPC Banner](https://opcfoundation.org/wp-content/themes/opc/images/logo.jpg)](https://opcfoundation.org/)
 
-# ARISE PoC Tutorial
-The ARISE PoC solution is created using Docker containers that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another. 
+# ARISE PoC Guide
+The ARISE Proof of Concept (PoC) is a FIWARE-based Minimum Viable Platform (MVP) composed of various Docker containers, which encapsulate the application code along with all its dependencies to ensure it runs consistently and reliably across different computing environments.
+This containerized approach simplifies deployment, eliminates dependency conflicts, and provides a scalable platform for testing and validation.
 
-This is a step-by-step tutorial that will introduce in detail how to enable ARISE PoC connecting different information sources as OPC UA devices with which to test several UCs originated by the TEFs.
+This tutorial is a step-by-step guide that demonstrates how to set up the necessary components and workflows, in order to enable the ARISE PoC to connect seamlessly with various information sources. It also provides the means to test a wide range of use cases (UCs) defined and implemented in the Test and Experimentation Facilities (TEFs). 
 
-
-![ARISE PoC Schema](../docs/images/ARISE-Schema-v2.png)
-
+<p align="center">
+  <img src="../docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
+</p>
 ## Actors
 
 The actors involved in the scenario are:
 
--   **OPC UA Server**, representing the data source utilized by TEF
--   **Iot Agent OPC UA**, the connector to join industrial environment to FIWARE can be configured as described in the
+-   **OPC UA Server**, represents the data source utilized by the TEF.
+-   **Iot Agent OPC UA**, the connector through which to join the industrial environment to this FIWARE-based platform can be configured as described in the
 [user guide](https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/user_and_programmers_manual.md).
-In order to start playing with the above mentioned OPC UA server, configuration files have been already edited and
-available in _conf_ folder.
--   **Orion LD Context Broker**, the broker as entry point of FIWARE platform using NGSI LD data model. Orion LD Context Broker can be external, however to have a black box for testing, it will be included in docker compose in
-order to have a self-supporting environment.
--   **MongoDB**, the database that saves the current state of the data passed through the OCB. It is used by the Orion LD Context Broker to hold context data information such as data entities, subscriptions and registrations. 
--   **Mintaka**, The GE Mintaka is a Generic Enabler (GE) of the FIWARE ecosystem designed for time series data storage and management. It serves as a lightweight, scalable API that allows the ingestion, querying, and analysis of historical context information from FIWARE Context Brokers. More information can be found [here](https://github.com/FIWARE/mintaka/blob/main/README.md).
+In order to start working with the above mentioned OPC UA server, configuration files have been already edited and made
+available in the _conf_ folder.
+-   **ROS2/FastDDS**, this connector implements both an Application Programming Interface (API) and a communication protocol that deploys a Data-Centric Publisher-Subscriber (DCPS) model, with the purpose of establishing efficient and reliable information distribution among Real-Time Systems.
+-   **Orion LD Context Broker**, is the entry point of each FIWARE platform that adopts the NGSI LD data model. It can be external, however, 
+in order to ensure a self-contained and self-consistent testing environment, it is included in this PoC as part of the Docker Compose setup.
+-   **MongoDB**, the database that saves the current state of the data passed through the context broker. It is used by the Orion LD to hold context data information such as data entities, subscriptions and registrations. 
+-   **Mintaka**, is a Generic Enabler (GE) of the FIWARE ecosystem designed for time series data storage and management. It serves as a lightweight, scalable API that allows the ingestion, querying, and analysis of historical context information from FIWARE Context Brokers. More information can be found [here](https://github.com/FIWARE/mintaka/blob/main/README.md).
 -   **TimescaleDB**,  is a time series database built on PostgreSQL, designed to handle large-scale, time-stamped data efficiently. It offers powerful SQL support for managing time series data, with features like automatic data partitioning, real-time aggregation, and advanced query capabilities. More information can be found [here](https://docs.timescale.com/).
--   **Grafana**, visualize data stored in CrateDB, using user-defined dashboards.Grafana is an open source software for time series analytics tool which will be used during this tutorial. It integrates with a variety of time-series databases including CrateDB. It is available licensed under the Apache License 2.0. More information can be found [here](https://grafana.com/).
+-   **Grafana**, is an open-source analytics and visualization platform that allows users to visualize data stored in TimeScaleDB through customizable dashboards.
+It supports data representation using charts, graphs, tables, and alerts. Besides TimeScaleDB, Grafana integrates with a wide range of data sources, including Prometheus, InfluxDB, MySQL, PostgreSQL, Elasticsearch, and more.
+It is released under the Apache License 2.0.More information can be found [here](https://grafana.com/).
 
 
+## Step-by-step Guide
 
-## Step-by-step Tutorial
-
-In this paragraph we are going to describe how to quickly deploy a working testbed consisting of all the actors.
+This section outlines the process for rapidly deploying a fully functional testbed that includes all relevant actors.
 
 #### Requirements
 
@@ -40,16 +43,21 @@ In this paragraph we are going to describe how to quickly deploy a working testb
 -   Docker-compose (Version 1.29+)
 -   RAM 8GB minimum
 
-Install docker and docker-compose by following the instructions available on the official web site:
+**Install docker and docker-compose** by following the instructions available on the official web site:
 
 -   Docker: [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 -   Docker-Compose: [here](https://docs.docker.com/compose/install/)
 
-Once docker has been correctly installed you can continue with the other steps
+**Verify Installation**: Run the following commands to check Docker and Docker Compose:
 
-#### Step 1 - Clone the ARISE PoC
+```bash
+docker --version
+docker-compose --version
+```
 
-Open a terminal and move into a folder in which to create the new folder containing the ARISE PoC
+#### Step 1 - Clone the ARISE PoC 
+
+Open a terminal and move into a folder in which to create the new folder containing the ARISE PoC components.
 
 Then run:
 
@@ -57,27 +65,29 @@ Then run:
 git clone "https://github.com/Engineering-Research-and-Development/arise-poc.git"
 ```
 
-#### Step 2 - Configure the platform 
-Before launching the application you need to edit the docker-compose.yaml file and configure Iot  Agent OPC UA according to your OPC UA Server specifications. 
+#### Step 2 - Configure the ARISE PoC  
+Before launching the ARISE PoC, it is essential to edit the docker-compose.yaml file and configure Iot Agent OPC UA service to align with your specific OPC UA Server's specifications.
 
 ```bash
 cd arise-poc/
 nano docker-compose.yaml
 ``` 
+Here are some environment variables that must be configured:
+- IOTA_CB_SERVICE allows to define where the OPCUA IoT Agent sends NGSI-LD context data;
+- IOTA_SERVICE defines the devices are registered;
+- IOTA_OPCUA_ENDPOINT is used in FIWARE IoT Agent for OPC UA to specify the OPC UA server endpoint.
 
 For a more complete description on how to configure the IoT Agent, go to [link](https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/howto.md).
 
-If any change is made to the mapping configuration, edit the subscription configuration of QuantumLeap accordingly, going to conf/quantumleap/subscription/subscription-ld.yaml
-
-#### Step 3 - Build & Run Platform
+#### Step 3 - Build & Run the ARISE PoC 
 
 To launch the whole project:
 
 ```bash
-docker-compose up --build -d
+docker compose up --build -d
 ```
 
-After that you can run:
+After that you can run: 
 
 ```bash
 docker ps
@@ -85,6 +95,13 @@ docker ps
 
 to check if all the required components are running.
 
+(../docs/images/ARISE_PoC_Container.png)
+
+Before starting the ROS2 demo, as X11 session owners, other users must be allowed to use the X Window System (to show the turtles on screen). For that, the following command is executed:
+
+```bash
+xhost local:root
+```
 When the dockers have started, connect to bash in the container of ros2:
 ```
 docker exec -ti ros2 bash
@@ -92,7 +109,7 @@ docker exec -ti ros2 bash
 
 Now the TurtleSim and the Keyboard controller can be started:
 
-```
+```bash
 source /ros2-ws/install/setup.bash
 
 # Show the turtles on the screen
@@ -101,34 +118,94 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 # Keyboard controller to move the turtles.
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
+<p align="center">
+  <img src="../docs/images/turtlesim.png" alt="TurtleSim View">
+</p>
 
-#### Step 4 - Access the Grafana Dashboard / CrateDB
-The UI part of the ARISE PoC is defined using Grafana that is an open source software for time series analytics tool which will be used during this tutorial. It integrates with a variety of time-series databases including CrateDB. It is available licensed under the Apache License 2.0. More information can be found at https://grafana.com/.
+#### Step 4 - Access the Grafana Dashboard 
 
-Grafana is accessible at the link https://localhost:3000 using the default credentials admin/admin
+In the context of the ARISE PoC, Grafana is used to visualize and analyze the data collected from OPC UA and ROS2 devices, offering an intuitive interface to monitor the performance, and trends of connected systems.
+This tool plays a critical role in helping users test various use cases by providing a clear view of the data flow and operational metrics. Grafana is distributed under the Apache License 2.0, ensuring that it is free to use, modify, and distribute.
+Its active open-source community and extensive documentation make it accessible to users of all expertise levels. 
+For more details, including installation guides, plugins, and advanced configuration options, visit the official Grafana website at https://grafana.com/.
+
+For this PoC, Grafana is accessible at the link https://localhost:3000 using the default credentials admin/admin
 
 #### Configuring a DataSource
-In Grafana the PostgreSQL Datasource is configured using the  datasources.yaml file in 
+In Grafana the Timescale datasource can be configured using the datasources.yaml file, which is part of Grafana's provisioning system. 
+This allows for automated setup and consistent configuration of the datasource when Grafana starts. 
+TimescaleDB, a powerful time-series database built on PostgreSQL, integrates seamlessly with Grafana, enabling efficient visualization of time-series data.
+
+To configure the TimescaleDB datasource follows these steps:
 
 ```bash
 cd arise-poc\conf\grafana\datasources 
 nano datasources.yaml
 ```
 
-![Datasource.yaml](../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true)
+<p align="center">
+  <img src="../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true" alt="Datasource.yaml">
+</p>
 
-#### Configuring a Dashboard
-To display a new dashboard, you can either click the + button and select Dashboard or go directly to http://localhost:3000/dashboard/new?orgId=1. Thereafter, click Add Query.
-Clicking the new Dashboard, you can select the Data Source, the table, the column, any types of data aggregations and the type of chart to represent the selected attribute as shown in the figure
 
-![New Dashboard in Grafana](../docs/images/ARISE_PoC_Grafana_Dashboard_Configuration.png)
+When the ARISE PoC is executed, this datasource.yaml file is mounted into the Grafana's provisioning folder to ensure proper configuration and access to the necessary data sources.
 
-In ARISE PoC, Dashboards based on the OPCUA device of the TEF1 of Cartif are defined, as shown in the figure. 
-![Select Dashboard Default](../docs/images/ARISE_PoC_Grafana_Dashboard_deafult.png)
+#### Creating a new Dashboard
+Creating a new dashboard in Grafana allows you to visualize and analyze your data effectively. Here's a step-by-step guide to help you set up a new dashboard:
+-Log in Grafana instance and click on the "+" icon in the top right menu, selecting "New Dashboard";
 
+<p align="center">
+  <img src="../docs/images/newDashboard.png" alt="Select New Dashboard">
+</p>
+
+
+
+- Click on "Add a new panel" and in the Query section, choose your data source. 
+<p align="center">
+  <img src="../docs/images/addNewPanel.png" alt="Add Visualization">
+</p>
+
+<p align="center">
+  <img src="../docs/images/selectDatasource.png" alt="Select DataSSource">
+</p>
+
+
+- Construct your query to fetch the desired data, selecting the appropriate visualization type (e.g., graph, table, gauge) from the options.
+
+<p align="center">
+  <img src="../docs/images/insert_query.png" alt="Insert Query">
+</p>
+
+<p align="center">
+  <img src="../docs/images/configure_graph_type.png" alt="Selecting the appropriate visualization type">
+</p>
+
+
+-To configure Panel Settings, you adjust the visualization settings such  axes, legends, and thresholds
+-Save the Panel and the Dashboard
+
+
+#### Sample Dashboard in ARISE PoC 
+For the ARISE Proof of Concept (PoC) solution, example dashboards have been developed to graphically represent data from both OPC UA devices and ROS2 devices.
+
+
+**Sample dashboard for data from an OPCUA device**
+ As shown in the figure, this sample dashboard is based on some of the data produced by an OPCUA device provided by TEF of Cartif for the ARISE research project. Specifically, the following parameters have been selected and represented from the entity implemented on the device: ALARM, Alarm1, Alarm2, Area, Target Position, and Step Data Out.
+ 
 ![Dashboard TEF1-Cartif](../docs/images/ARISE_PoC_Grafana_Dashboard_Example.png)
 
-![Dashboard TurtleSim](../docs/images/ARISE_PoC_Turtle_Dashboard.png)
+**Sample dashboard for data from an ROS2 device**
+This sample dashboard represents the data of the entity defined in a ROS2 device. Specifically, for the ARISE research project, three TURTLESIM instances have been implemented as ROS2 devices, and for each of them, the following data is represented:
+
+-**Turtle Pose**: This includes the turtle's linear velocity, its position coordinates (X and Y), and the orientation angle (Theta). These parameters provide crucial information about the turtle's current location and direction of movement in the coordinate system.
+
+-**Turtle Linear Velocity**: This metric indicates the speed at which the turtle is moving in a straight line. It is essential for understanding the turtle's movement dynamics and can be visualized as a gauge or graph, showing real-time changes in speed.
+
+-**Turtle Angular Velocity**: This metric represents the speed of rotation around the Z-axis. Angular velocity is critical for analyzing how quickly the turtle can change its direction, which is particularly important in dynamic environments or when navigating complex paths.
+
+By visualizing these parameters on the dashboard, users can monitor the performance and behavior of the TURTLESIM devices in real-time. The dashboard facilitates a comprehensive overview of the turtles' movements, allowing for effective analysis and decision-making during experiments. 
+
+![Dashboard TurtleSim](../docs/images/ARISE_PoC_TurtleSim_Dashboard.png)
 
 
 ## Appendices
