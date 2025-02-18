@@ -1,4 +1,4 @@
-![ARISE Banner](https://github.com/Engineering-Research-and-Development/arise-poc/blob/main/docs/images/ARISE_logo.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![ARISE Banner](../docs/images/ARISE_logo.jpg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 
