@@ -13,6 +13,7 @@ This tutorial is a step-by-step guide that demonstrates how to set up the necess
 <p align="center">
   <img src="../docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
 </p>
+
 ## Actors
 
 The actors involved in the scenario are:
@@ -777,19 +778,17 @@ you can access the value that this variable takes on in the compound column,i.e.
 Here are some query example :
 
 ```bash
-select (a.compound->>'x')::numeric as X,  (a.compound->>'y')::numeric as Y, (a.compound->>'turtle_id') as  Turtle, a.ts as Timestamp
-from 
-"attributes" a 
+select (a.compound->>'x')::numeric as "X",  (a.compound->>'y')::numeric as "Y", (a.compound->>'turtle_id') as  "Turtle", a.ts as "Timestamp"
+from "attributes" a 
 where a.entityid ='urn:ngsi-ld:robot:1' 
 and a.id like '%/pose' 
 and (a.compound ->> 'linear_velocity')::numeric >1
 and a.ts > '2025-02-16T00:00:00'
 
-Select 
-(a.compound->'linear'->>'x')::numeric as "Velocity Linear X",
+select (a.compound->'linear'->>'x')::numeric as "Velocity Linear X",
 (a.compound->'linear'->>'y')::numeric as "Velocity Linear Y",
-a.ts 
-From "attributes" a 
+a.ts as "Timestamp"
+from "attributes" a 
 where a.id like '%velocityCommand'
 and compound->>'turtle_id' = '2';
 '''
