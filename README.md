@@ -4,9 +4,11 @@
 https://arise-middleware.eu/
 
 
-PoC of an all-in-one data management platform that collects and visualizes data from an OPC UA server.
+PoC of an all-in-one data management platform that collects and visualizes data from  OPCUA and ROS2 devices.
 
-![ARISE PoC Schema](./docs/images/ARISE-Schema-v2.png)
+<p align="center">
+  <img src="./docs/images/ARISE-Schema-v2.png" alt="ARISE PoC Schema">
+</p>
 
 <h2>Requirements</h2>
 <ul>
@@ -63,7 +65,7 @@ ros2 run docs_turtlesim turtlesim_multi_control
 
 <h3>Access the UIs</h3>
 
-1. Grafana at (https://localhost:3000)
+1. Grafana at (https://localhost/login)
 2. Default credentials are: admin/admin
 
 <br>
