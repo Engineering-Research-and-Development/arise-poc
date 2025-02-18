@@ -1,7 +1,8 @@
 services:
   iot-agent:
-    image: iotagent4fiware/iotagent-opcua:2.3.1
+    image: iotagent-opcua
     hostname: iotagent-opcua
+    build: ./build/iotagent-opcua
     depends_on:
       - mongodb
       - orion
@@ -77,7 +78,8 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.8.0-PRE-1646
+    #image: fiware/orion-ld:1.8.0-PRE-1646
+    image: fiware/orion-ld:1.8.0
     hostname: orion
     privileged: true
     ipc: host
@@ -118,7 +120,8 @@ services:
        - /tmp/.X11-unix:/tmp/.X11-unix
 
   timescale:
-    image: timescale/timescaledb-postgis:1.7.5-pg12
+    #image: timescale/timescaledb-postgis:1.7.5-pg12
+    image: timescale/timescaledb-ha:pg17-ts2.18
     hostname: timescale
     networks:
       - hostnet
@@ -137,7 +140,8 @@ services:
       start_period: 60s
 
   mintaka:
-    image: fiware/mintaka:0.4.3
+    #image: fiware/mintaka:0.4.3
+    image: fiware/mintaka:0.6.18
     hostname: mintaka
     restart: always
     networks:
@@ -155,7 +159,8 @@ services:
       - DATASOURCES_DEFAULT_USERNAME=orion
       - DATASOURCES_DEFAULT_PASSWORD=orion
       - DATASOURCES_DEFAULT_DATABASE=orion
-      - LOGGERS_LEVELS_ROOT=DEBUG
+      - LOGGERS_LEVEL_ROOT=TRACE
+      
 
   grafana:
     image: grafana/grafana:latest
@@ -164,6 +169,8 @@ services:
       - hostnet
     ports:
       - 443:3000
+    depends_on:
+      - mintaka  
     environment:
       - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
       - GF_SERVER_PROTOCOL=https

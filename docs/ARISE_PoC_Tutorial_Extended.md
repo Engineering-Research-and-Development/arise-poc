@@ -18,19 +18,27 @@ This tutorial is a step-by-step guide that demonstrates how to set up the necess
 The actors involved in the scenario are:
 
 -   **OPC UA Server**, represents the data source utilized by the TEF.
--   **Iot Agent OPC UA**, the connector through which to join the industrial environment to this FIWARE-based platform can be configured as described in the
-[user guide](https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/user_and_programmers_manual.md).
+-   **Iot Agent OPC UA**, the connector through which to join the industrial environment to this FIWARE-based platform can be configured as described in [Documentation](https://github.com/Engineering-Research-and-Development/iotagent-opcua/blob/master/docs/user_and_programmers_manual.md) and in 
+[GitHub](https://github.com/Engineering-Research-and-Development/iotagent-opcua/tree/master) .
 In order to start working with the above mentioned OPC UA server, configuration files have been already edited and made
 available in the _conf_ folder.
--   **ROS2/FastDDS**, this connector implements both an Application Programming Interface (API) and a communication protocol that deploys a Data-Centric Publisher-Subscriber (DCPS) model, with the purpose of establishing efficient and reliable information distribution among Real-Time Systems.
+-   **ROS2/FastDDS**, this connector implements both an Application Programming Interface (API) and a communication protocol that deploys a Data-Centric Publisher-Subscriber (DCPS) model, with the purpose of establishing efficient and reliable information distribution among Real-Time Systems. 
+More information can be found here in
+[Documentation](https://fast-dds.doc.eprosima.com/en/latest/) and in 
+[GitHub](https://github.com/FIWARE/context.Orion-LD/tree/develop/demo/ros2)
 -   **Orion LD Context Broker**, is the entry point of each FIWARE platform that adopts the NGSI LD data model. It can be external, however, 
-in order to ensure a self-contained and self-consistent testing environment, it is included in this PoC as part of the Docker Compose setup.
+in order to ensure a self-contained and self-consistent testing environment, it is included in this PoC as part of the Docker Compose setup. 
+More information can be found here in 
+[Documentation](https://github.com/FIWARE/context.Orion-LD/tree/develop/doc/manuals-ld) and in [GitHub](https://github.com/FIWARE/context.Orion-LD)
 -   **MongoDB**, the database that saves the current state of the data passed through the context broker. It is used by the Orion LD to hold context data information such as data entities, subscriptions and registrations. 
--   **Mintaka**, is a Generic Enabler (GE) of the FIWARE ecosystem designed for time series data storage and management. It serves as a lightweight, scalable API that allows the ingestion, querying, and analysis of historical context information from FIWARE Context Brokers. More information can be found [here](https://github.com/FIWARE/mintaka/blob/main/README.md).
--   **TimescaleDB**,  is a time series database built on PostgreSQL, designed to handle large-scale, time-stamped data efficiently. It offers powerful SQL support for managing time series data, with features like automatic data partitioning, real-time aggregation, and advanced query capabilities. More information can be found [here](https://docs.timescale.com/).
+More information can be found in[Documentation](https://www.mongodb.com/docs/manual/) and in [GitHub](ttps://github.com/mongodb/mongo)
+-   **Mintaka**, is a Generic Enabler (GE) of the FIWARE ecosystem designed for time series data storage and management. It serves as a lightweight, scalable API that allows the ingestion, querying, and analysis of historical context information from FIWARE Context Brokers. More information can be found in [Documentation](https://github.com/FIWARE/mintaka?tab=readme-ov-file#documentation) and in 
+[GitHub](https://github.com/FIWARE/mintaka) . 
+-   **TimescaleDB**,  is a time series database built on PostgreSQL, designed to handle large-scale, time-stamped data efficiently. It offers powerful SQL support for managing time series data, with features like automatic data partitioning, real-time aggregation, and advanced query capabilities. More information can be found in [Documentation](https://docs.timescale.com/) and in [GitHub](https://github.com/timescale/timescaledb)
+.
 -   **Grafana**, is an open-source analytics and visualization platform that allows users to visualize data stored in TimeScaleDB through customizable dashboards.
 It supports data representation using charts, graphs, tables, and alerts. Besides TimeScaleDB, Grafana integrates with a wide range of data sources, including Prometheus, InfluxDB, MySQL, PostgreSQL, Elasticsearch, and more.
-It is released under the Apache License 2.0.More information can be found [here](https://grafana.com/).
+It is released under the Apache License 2.0.More information can be found in [Documentation](https://grafana.com/) and in [GitHub](https://github.com/grafana/grafana).
 
 
 ## Step-by-step Guide
@@ -81,7 +89,7 @@ For a more complete description on how to configure the IoT Agent, go to [link](
 
 #### Step 3 - Build & Run the ARISE PoC 
 
-To launch the whole project:
+To launch the whole PoC:
 
 ```bash
 docker compose up --build -d
@@ -94,9 +102,11 @@ docker ps
 ```
 
 to check if all the required components are running.
-
-(../docs/images/ARISE_PoC_Container.png)
-
+<p align="center">
+  <img src="../docs/images/ARISE_PoC_Container.png"
+" alt="Container view">
+</p>
+(.
 Before starting the ROS2 demo, as X11 session owners, other users must be allowed to use the X Window System (to show the turtles on screen). For that, the following command is executed:
 
 ```bash
@@ -119,7 +129,7 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
 <p align="center">
-  <img src="../docs/images/turtlesim.png" alt="TurtleSim View">
+  <img src="../docs/images/turtlesim.png" alt="turtlesim view">
 </p>
 
 #### Step 4 - Access the Grafana Dashboard 
@@ -129,7 +139,7 @@ This tool plays a critical role in helping users test various use cases by provi
 Its active open-source community and extensive documentation make it accessible to users of all expertise levels. 
 For more details, including installation guides, plugins, and advanced configuration options, visit the official Grafana website at https://grafana.com/.
 
-For this PoC, Grafana is accessible at the link https://localhost:3000 using the default credentials admin/admin
+For this PoC, Grafana is accessible at the link https://localhost/login using the default credentials admin/admin
 
 #### Configuring a DataSource
 In Grafana the Timescale datasource can be configured using the datasources.yaml file, which is part of Grafana's provisioning system. 
@@ -144,7 +154,7 @@ nano datasources.yaml
 ```
 
 <p align="center">
-  <img src="../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png?raw=true" alt="Datasource.yaml">
+  <img src="../docs/images/ARISE_PoC_Grafana_Datasource_File_Configuration.png" alt="Datasource.yaml">
 </p>
 
 
@@ -185,17 +195,17 @@ Creating a new dashboard in Grafana allows you to visualize and analyze your dat
 -Save the Panel and the Dashboard
 
 
-#### Sample Dashboard in ARISE PoC 
-For the ARISE Proof of Concept (PoC) solution, example dashboards have been developed to graphically represent data from both OPC UA devices and ROS2 devices.
+#### Example Dashboard in ARISE PoC 
+For the ARISE Proof of Concept (PoC), example dashboards have been developed to graphically represent data from both OPC UA devices and ROS2 devices.
 
 
-**Sample dashboard for data from an OPCUA device**
- As shown in the figure, this sample dashboard is based on some of the data produced by an OPCUA device provided by TEF of Cartif for the ARISE research project. Specifically, the following parameters have been selected and represented from the entity implemented on the device: ALARM, Alarm1, Alarm2, Area, Target Position, and Step Data Out.
+**Dashboard for data from an OPCUA device**
+ As shown in the figure, this example dashboard is based on some of the data produced by an OPCUA device provided by TEF of CARTIF for the ARISE research project. Specifically, the following parameters have been selected and represented from the entity implemented on the device: ALARM, Alarm1, Alarm2, Area, Target Position, and Step Data Out.
  
-![Dashboard TEF1-Cartif](../docs/images/ARISE_PoC_Grafana_Dashboard_Example.png)
+![Dashboard TEF1-CARTIF](../docs/images/ARISE_PoC_Grafana_Dashboard_Example.png)
 
-**Sample dashboard for data from an ROS2 device**
-This sample dashboard represents the data of the entity defined in a ROS2 device. Specifically, for the ARISE research project, three TURTLESIM instances have been implemented as ROS2 devices, and for each of them, the following data is represented:
+**Dashboard for data from an ROS2 device**
+This example dashboard represents the data of the entity defined in a ROS2 device. Specifically, for the ARISE research project, three turtlesim instances have been implemented as ROS2 devices, and for each of them, the following data is represented:
 
 -**Turtle Pose**: This includes the turtle's linear velocity, its position coordinates (X and Y), and the orientation angle (Theta). These parameters provide crucial information about the turtle's current location and direction of movement in the coordinate system.
 
@@ -203,10 +213,74 @@ This sample dashboard represents the data of the entity defined in a ROS2 device
 
 -**Turtle Angular Velocity**: This metric represents the speed of rotation around the Z-axis. Angular velocity is critical for analyzing how quickly the turtle can change its direction, which is particularly important in dynamic environments or when navigating complex paths.
 
-By visualizing these parameters on the dashboard, users can monitor the performance and behavior of the TURTLESIM devices in real-time. The dashboard facilitates a comprehensive overview of the turtles' movements, allowing for effective analysis and decision-making during experiments. 
+By visualizing these parameters on the dashboard, users can monitor the performance and behavior of the turtlesim devices in real-time. The dashboard facilitates a comprehensive overview of the turtles' movements, allowing for effective analysis and decision-making during experiments. 
 
-![Dashboard TurtleSim](../docs/images/ARISE_PoC_TurtleSim_Dashboard.png)
+![Dashboard turtlesim](../docs/images/ARISE_PoC_TurtleSim_Dashboard.png)
 
+
+#### Grafana Alerting System in ARISE PoC 
+For the ARISE PoC, the Grafana alert system is activated to monitor specific events or circumstances. This system allows monitoring defined metrics by creating queries and expressions from multiple data sources, defining thresholds and alarm messages.
+In this context, the Contact Point, i.e., the notification distribution channel, must therefore be defined. Among these channels, we have Telegram, Microsoft Teams, Slack, Discord, etc.
+As an example, Telegram was chosen, and the BOT API Token and Chat ID were inserted. More details can be found at the [link](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-telegram/#:~:text=In%20Grafana%2C%20navigate%20to%20Alerting%20%3E%20Alert%20rules.,created%20contact%20point.%20Click%20Save%20rule%20and%20exit).
+
+
+#### Step 1 - Define Contact Point
+Select the Alerting from the Grafana menu and then Contact Points. Fill in the fields shown in the figure with the Bot API Token and Chat ID obtained from Telegram
+[link](https://grafana.com/docs/grafana/latest/alerting/configure-notifications/manage-contact-points/integrations/configure-telegram/#:~:text=In%20Grafana%2C%20navigate%20to%20Alerting%20%3E%20Alert%20rules.,created%20contact%20point.%20Click%20Save%20rule%20and%20exit)
+
+<table>
+<tr>
+<td>
+<p align="center">
+  <img src="../docs/images/Alerting_menu.png" alt="Select Alerting/Contact Points menu">
+  </p>
+</td>
+<td>
+<p align="center">
+  <img src="../docs/images/contact_point.png" alt="Define Contact Points">
+  </p>
+</td>
+</tr>
+</table>
+
+
+
+#### Step 2 - Define Alert Rule
+Alert Rules have a dashboard that summarizes the status of the Alerts on the monitored data, the show data history, the time interval for which the rule is applied and other parameters.
+
+<p align="center">
+  <img src="../docs/images/dashboard_alert_rule.png" alt="Dashboard Alert Rule">
+  </p>
+
+
+Click on "New Alert Rule" to define a new Rule, enter the name, define the query and alert condition, 
+
+<p align="center">
+  <img src="../docs/images/newrule_1.png" alt="Query and Alert Condition">
+  </p>
+
+
+Define a new threshold, specifying both the parameter to be evaluated (Input) and the condition for exceeding the threshold. 
+Specify a folder where the alert rules will be saved, set an evaluation behavior to define how the alert rule will be evaluated. 
+Finally, select the previously defined contact point.
+
+<p align="center">
+  <img src="../docs/images/newrule_2.png" alt="Threshold and Contact Point">
+  </p>
+
+
+It is possible to configure and customize the notification message that will be forwarded via the selected contact point
+<p align="center">
+  <img src="../docs/images/newrule_3.png" alt="Configure Notification Message">
+  </p>
+
+
+#### Step 3 - ARISE Notification in Telegram
+
+When the thresholds defined on Grafana are exceeded, alert messages are sent to the ARISE Alert Project Notification channel
+<p align="center">
+  <img src="../docs/images/ARISE_AlertNotification.jpg" alt="Configure Notification Message">
+  </p>
 
 ## Appendices
 
@@ -664,3 +738,58 @@ networks:
   hostnet:
     driver: bridge
 ```
+#### Example of how to build the query in the Grafana Dashboard
+
+The data collected from the various OPCUA and ROS2 sources are managed by ORION-LD and historized in the timescale databases. 
+Each database follows the same schema, consisting of four tables attributes , entities, spatial_ref_sys and subattributes. 
+<p align="center">
+  <img src="../docs/images/Database Tables.png" alt="Database Tables">
+  </p>
+
+The entities are registered in the entities table as shown in following figure
+<p align="center">
+  <img src="../docs/images/entities_table.png" alt="Entites Table">
+  </p>
+
+The data is stored in the attributes table. This table contains several columns as shown in following figure.
+<p align="center">
+  <img src="../docs/images/Column_attributes_table.png" alt="Attributes Table">
+  </p>
+
+To select the data to be used in Grafana dashboards, the following columns can be considered:
+
+```bash
+  entityid ='urn:ngsi-ld:robot:1'
+  id= 'https://uri.etsi.org/ngsi-ld/default-context/pose'
+  compound='{"x": 9.943054, "y": 4.432139, "theta": -0.544, "turtle_id": 2, "linear_velocity": 2, "angular_velocity": 0}'
+  ```
+
+The "entityId" column identifies the ID of the entity,  
+The "id" column specifies the type of the data, as for example 'Pose'. 
+This data has a syntax that is completed in the "compound" column.
+
+To access the data inside this JSON object, you can use functions provided by SQL. For example, writing 
+
+a.compound->>'x'
+
+you can access the value that this variable takes on in the compound column,i.e. x=9.943054.
+
+Here are some query example :
+
+```bash
+select (a.compound->>'x')::numeric as X,  (a.compound->>'y')::numeric as Y, (a.compound->>'turtle_id') as  Turtle, a.ts as Timestamp
+from 
+"attributes" a 
+where a.entityid ='urn:ngsi-ld:robot:1' 
+and a.id like '%/pose' 
+and (a.compound ->> 'linear_velocity')::numeric >1
+and a.ts > '2025-02-16T00:00:00'
+
+Select 
+(a.compound->'linear'->>'x')::numeric as "Velocity Linear X",
+(a.compound->'linear'->>'y')::numeric as "Velocity Linear Y",
+a.ts 
+From "attributes" a 
+where a.id like '%velocityCommand'
+and compound->>'turtle_id' = '2';
+'''

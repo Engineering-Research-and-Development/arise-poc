@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -106,7 +106,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -139,7 +139,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -202,7 +202,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "P6122266B226B95A4"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -284,7 +284,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -371,7 +371,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -426,7 +426,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -525,7 +525,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -574,7 +574,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -656,7 +656,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "P6122266B226B95A4"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -724,7 +724,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "PA925617886E8799C"
+        "uid": "P6B2B9F59510FEDAB"
       },
       "fieldConfig": {
         "defaults": {
@@ -822,7 +822,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "bdwb4kfsfnvuoa"
+            "uid": "P6B2B9F59510FEDAB"
           },
           "editorMode": "code",
           "format": "table",
@@ -882,7 +882,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "AriseDashboard",
+  "title": "OPCUA _Dashboard",
   "uid": "edw7n9k3jc4cge2",
   "version": 1,
   "weekStart": ""

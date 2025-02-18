@@ -10,3 +10,13 @@ datasources:
     jsonData:
       database: orion
       sslmode: 'disable'
+      
+  - name: orion_cartif
+    type: grafana-postgresql-datasource
+    url: timescale:5432
+    user: orion
+    secureJsonData:
+      password: ''
+    jsonData:
+      database: orion_cartif
+      sslmode: 'disable'    

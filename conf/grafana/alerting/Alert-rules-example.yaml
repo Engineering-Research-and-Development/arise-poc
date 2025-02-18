@@ -1,0 +1,69 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: Alert Group
+      folder: alert_rules
+      interval: 30s
+      rules:
+        - uid: cedclk8l43gu8d
+          title: Alert Notification Example
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: P6B2B9F59510FEDAB
+              model:
+                datasource:
+                    type: grafana-postgresql-datasource
+                    uid: P6B2B9F59510FEDAB
+                editorMode: code
+                format: table
+                intervalMs: 1000
+                maxDataPoints: 43200
+                rawQuery: true
+                rawSql: "select (a.compound->>'@value')::numeric as \"Alarm1\", a.instanceid\nfrom \"attributes\" a \nwhere \na.id like'%/Alarm1' \n\n"
+                refId: A
+                sql:
+                    columns:
+                        - parameters: []
+                          type: function
+                    groupBy:
+                        - property:
+                            type: string
+                          type: groupBy
+                    limit: 50
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 36
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          noDataState: NoData
+          execErrState: Error
+          for: 30s
+          annotations:
+            summary: Alarm1 has exceeded the configured threshold.
+          isPaused: false
+          notification_settings:
+            receiver: ARISE_Telegram_Notification
