@@ -61,7 +61,7 @@ This section outlines the process for rapidly deploying a fully functional testb
 
 ```bash
 docker --version
-docker-compose --version
+docker compose --version
 ```
 
 #### Step 1 - Clone the ARISE PoC 
@@ -129,9 +129,21 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 # Keyboard controller to move the turtles.
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
+
+<table>
+<tr>
+<td>
 <p align="center">
   <img src="../docs/images/turtlesim.png" alt="turtlesim view">
 </p>
+</td>
+<td>
+<p align="center">
+  <img src="../docs/images/turtlesim_keyboard.png" alt="TurtleSim Keyboard">
+  </p>
+</td>
+</tr>
+</table>
 
 #### Step 4 - Access the Grafana Dashboard 
 

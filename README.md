@@ -63,10 +63,15 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
 
-<h3>Access the UIs</h3>
+<h3>Access the Grafana UI</h3>
+
+To access the Grafana GUI, you can use the following link:
 
 1. Grafana at (https://localhost/login)
 2. Default credentials are: admin/admin
+
+This allows you to view dashboards with data generated from various data sources, such as the OPCUA Server and ROS2.
+
 
 <br>
 
