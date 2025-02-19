@@ -765,15 +765,16 @@ To select the data to be used in Grafana dashboards, the following columns can b
   compound='{"x": 9.943054, "y": 4.432139, "theta": -0.544, "turtle_id": 2, "linear_velocity": 2, "angular_velocity": 0}'
   ```
 
-The "entityId" column identifies the ID of the entity,  
-The "id" column specifies the type of the data, as for example 'Pose'. 
-This data has a syntax that is completed in the "compound" column.
+The "entityId" column identifies the ID of the entity, while the "id" column specifies the type of the data, such as 'Pose'. The data are described in the "compound" column, which is defined as a jsonb type.
 
-To access the data inside this JSON object, you can use functions provided by SQL. For example, writing 
+To access the data contained in the compound column, it can use the functions provided by TimescaleDB. For example, writing a.compound->>'x' can access the value that this variable takes on in the composite column, i.e., x = 9.943054.
 
-a.compound->>'x'
+More information can be found in the following link:
 
-you can access the value that this variable takes on in the compound column,i.e. x=9.943054.
+[Documentation Select in TimescaleDB](https://docs.timescale.com/getting-started/latest/queries/)
+
+[Documentation Query JsonB in TimescaleDB](https://www.timescale.com/learn/how-to-query-jsonb-in-postgresql)
+
 
 Here are some query example :
 
