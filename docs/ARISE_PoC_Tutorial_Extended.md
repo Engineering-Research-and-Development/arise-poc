@@ -280,7 +280,7 @@ It is possible to configure and customize the notification message that will be 
 
 When the thresholds defined on Grafana are exceeded, alert messages are sent to the ARISE Alert Project Notification channel
 <p align="center">
-  <img src="../docs/images/ARISE_AlertNotification.jpg" alt="Configure Notification Message">
+  <img src="../docs/images/ARISE_AlertNotification.jpg" alt="Configure Notification Message" width="300">
   </p>
 
 ## Appendices
