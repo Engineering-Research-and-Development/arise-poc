@@ -130,20 +130,9 @@ ros2 run docs_turtlesim turtlesim_node_keys &
 ros2 run docs_turtlesim turtlesim_multi_control 
 ```
 
-<table>
-<tr>
-<td>
 <p align="center">
-  <img src="../docs/images/turtlesim.png" alt="turtlesim view">
+  <img src="../docs/images/keyboard_turtlesim.png" alt="turtlesim view">
 </p>
-</td>
-<td>
-<p align="center">
-  <img src="../docs/images/turtlesim_keyboard.png" alt="TurtleSim Keyboard">
-  </p>
-</td>
-</tr>
-</table>
 
 #### Step 4 - Access the Grafana Dashboard 
 
