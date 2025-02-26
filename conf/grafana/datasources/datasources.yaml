@@ -20,3 +20,17 @@ datasources:
     jsonData:
       database: orion_cartif
       sslmode: 'disable'    
+  
+  - id: 3
+    uid: "aee7znssxxvr4c"
+    orgId: 1
+    name: "yesoreyeram-infinity-datasource"
+    type: "yesoreyeram-infinity-datasource"
+    url: ""
+    basicAuth: false
+    basicAuthUser: ""
+    isDefault: false
+    jsonData:
+      global_queries: []
+    readOnly: false
+    apiVersion: ""    
