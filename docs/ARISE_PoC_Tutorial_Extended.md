@@ -244,6 +244,53 @@ By visualizing these parameters on the dashboard, users can monitor the performa
 
 ![Dashboard turtlesim](../docs/images/ARISE_PoC_TurtleSim_Dashboard.png)
 
+**Dashboard for historical data using Mintaka**
+
+<p align="justify"> 
+To building dashboards with historical data, the Grafana instance in ARISE PoC integrates the "Grafana Infinity Datasource" plugin, which allows external APIs to be added as data sources, supporting various formats such as JSON, XML, and more. 
+
+More information about this plugin are available at the following [link](https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/) 
+
+</p>
+<p align="justify"> 
+The APIs to access historical data are provided by Mintaka, a FIWARE Generic Enabler (GE), which implements an APIs to access the retrieval of temporal data in NGSI-LD format. Also it allows transparent to the user, the database used for historicization . 
+
+More information about Mintaka and the implemented APIs are available at the following [link](https://github.com/FIWARE/mintaka/blob/main/api/full_api.yaml)
+
+The Mintaka API that was chosen has the following syntax:
+
+```bash
+http://<hostname_mintaka_instance>:<port>/temporal/entities/<entityId>?timeproperty=modifiedAt&timerel=between&timeAt=<"start date in the ISO 8601 format YYYY-MM-DDT:HH:MM:SS">&endTimeAt=<"End date in the  ISO 8601 format YYYY-MM-DDT:HH:MM:SS">
+```
+Creating a dashboard for the graphical representation of historical data follows the same steps described in the "Creating a New Dashboard" section. However, there are a few minor variations to consider, such as:
+
+-Select the yesoreyeram-infinity-datasource installed by default in Grafana instance in ARISE PoC
+![Historical Dashboard - Grafana Configuration - Choose Datasource](../docs/images/choose_datasource.png)
+
+
+-Define the Endpoint from which the data will be fetched.  Specifically, add the URI of the selected Mintaka API, properly configured as shown in the example.
+
+```bash
+http://mintaka_opcua:8081/temporal/entities/urn:ngsi-ld:Device:servidor_1DBRVC?timeproperty=modifiedAt&timerel=between&timeAt=2024-01-01T00:00:00&endTimeAt=2026-01-01T00:00:00
+```
+
+-Configure HTTP Headers: Add the necessary HTTP headers, such as Accept and Content-Type specifications, to ensure proper communication with the data source.
+
+![Historical Dashboard - Grafana Configuration - Configure URI and HTTP Headers](../docs/images/Configure_URI_and_HTTPHeaders.png)
+Based on the Json obtained from the Mintaka API, it is possible to identify the key/column of interest which is selected to extract the desired information. As shown in the following figure, the key/column "Alarm" has been selected. It determines the main data structure from which the information will be extracted.
+
+![Historical Dashboard - Grafana Configuration - Parsing Rules](../docs/images/Parsing_rules.png)
+
+The Historical Dashboard obtained is the one shown in the following figure
+
+![Historical Dashboard - Grafana Configuration - Configure URI and HTTP Headers](../docs/images/HistoricalDashboard-GrafanaConfiguration.png)
+
+Based on the JSON obtained from the Mintaka API, some transformations may be needed using the Grafana plugin as shown in the following figures for the historical data used in ROS2 dashboards.
+
+![Historical Dashboard - Grafana Configuration - Configure URI and HTTP Headers](../docs/images/Trasformation-FilterByName.png)
+![Historical Dashboard - Grafana Configuration - Configure URI and HTTP Headers](../docs/images/Trasformation-FilterByValues.png)
+
+</p>
 
 #### Grafana Alerting System in ARISE PoC 
 <p align="justify">
