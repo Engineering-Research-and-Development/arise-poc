@@ -277,6 +277,7 @@ http://mintaka_opcua:8081/temporal/entities/urn:ngsi-ld:Device:servidor_1DBRVC?t
 -Configure HTTP Headers: Add the necessary HTTP headers, such as Accept and Content-Type specifications, to ensure proper communication with the data source.
 
 ![Historical Dashboard - Grafana Configuration - Configure URI and HTTP Headers](../docs/images/Configure_URI_and_HTTPHeaders.png)
+
 Based on the Json obtained from the Mintaka API, it is possible to identify the key/column of interest which is selected to extract the desired information. As shown in the following figure, the key/column "Alarm" has been selected. It determines the main data structure from which the information will be extracted.
 
 ![Historical Dashboard - Grafana Configuration - Parsing Rules](../docs/images/Parsing_rules.png)
