@@ -375,6 +375,8 @@ Three different initialization modalities are available:
 Using the 'auto' mode  in the TEF1 of the ARISE project,  the initialization phase allowed us to define a mapping tool as follows:
 </p>
 
+<div style="max-height: 450px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+
 ```bash
 {
      types: {
@@ -623,6 +625,7 @@ Using the 'auto' mode  in the TEF1 of the ARISE project,  the initialization pha
     ]
 }
 ```
+</div>
 
 ####  Monitor Container behaviour
 
@@ -645,11 +648,14 @@ Modifying this file you can:
 -   Change extra hosts in iot-agent
 -   Change IOTA_OPCUA_ENDPOINT
 
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+
 ```yaml
 services:
   iot-agent:
-    image: iotagent4fiware/iotagent-opcua:2.2.8
+    image: iotagent-opcua
     hostname: iotagent-opcua
+    build: ./build/iotagent-opcua
     depends_on:
       - mongodb
       - orion
@@ -658,8 +664,10 @@ services:
     extra_hosts:
       - "my-local-opcua-server:192.168.1.100"
     ports:
+      #Exposed ports
       - "4041:4041"
       - "9229:9229"
+      #End - Exposed ports
     environment:
       # Environment variables as before
       - "CONFIGURATION_TYPE=static"
@@ -672,14 +680,18 @@ services:
       - "IOTA_CB_PORT=1026"
       - "IOTA_CB_NGSIVERSION=ld"
       - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+      #Extra hosts in iot-agent
       - "IOTA_CB_SERVICE=opcua_server"
+      #End - Extra hosts in iot-agent
       - "IOTA_CB_SUBSERVICE=/demo"
       - "IOTA_NORTH_PORT=4041"
       - "IOTA_REGISTRY_TYPE=mongodb"
       - "IOTA_MONGO_HOST=mongodb"
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
+      #Extra hosts in iot-agent
       - "IOTA_SERVICE=opcua_server"
+      #End - Extra hosts in iot-agent
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -689,7 +701,9 @@ services:
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
+      #IOTA_OPCUA_ENDPOINT
       - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
+      #End- IOTA_OPCUA_ENDPOINT
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
@@ -722,7 +736,7 @@ services:
       - mongodb:/data
 
   orion:
-    image: fiware/orion-ld:1.8.0-PRE-1646
+    image: fiware/orion-ld:1.8.0
     hostname: orion
     privileged: true
     ipc: host
@@ -734,6 +748,13 @@ services:
       - "1026:1026"
     restart: always
     command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
+    environment:
+      - ORIONLD_TROE=TRUE
+      - ORIONLD_TROE_HOST=timescale
+      - ORIONLD_TROE_PORT=5432
+      - ORIONLD_TROE_USER=orion
+      - ORIONLD_TROE_PWD=orion
+      - ORIONLD_MONGO_HOST=mongodb
     volumes:
        - ./conf/orionld/config-dds.json:/root/.orionld
     healthcheck:
@@ -747,15 +768,16 @@ services:
     container_name: ros2
     privileged: true
     ipc: host
+    build: ./build/ros2
     networks:
       - hostnet
     environment:
-      DISPLAY: ":0.0"
+      DISPLAY: "$DISPLAY"
     volumes:
        - /tmp/.X11-unix:/tmp/.X11-unix
 
   timescale:
-    image: timescale/timescaledb-postgis:1.7.5-pg12
+    image: timescale/timescaledb-ha:pg17-ts2.18
     hostname: timescale
     networks:
       - hostnet
@@ -773,9 +795,10 @@ services:
       retries: 5
       start_period: 60s
 
-  mintaka:
-    image: fiware/mintaka:0.4.3
-    hostname: mintaka
+  
+  mintaka_ros2:
+    image: fiware/mintaka:0.6.18
+    hostname: mintaka_ros2
     restart: always
     networks:
       - hostnet 
@@ -792,24 +815,54 @@ services:
       - DATASOURCES_DEFAULT_USERNAME=orion
       - DATASOURCES_DEFAULT_PASSWORD=orion
       - DATASOURCES_DEFAULT_DATABASE=orion
-      - LOGGERS_LEVELS_ROOT=DEBUG
-
+      - LOGGERS_LEVEL_ROOT=TRACE
+  
+  mintaka_opcua:
+    image: fiware/mintaka:0.6.18
+    hostname: mintaka_opcua
+    restart: always
+    networks:
+      - hostnet 
+    ports:
+      - "8081:8081"
+    environment:
+      - MICRONAUT_SERVER_PORT=8081
+      - MICRONAUT_METRICS_ENABLED=true
+      - ENDPOINTS_ALL_PORT=8081
+      - ENDPOINTS_METRICS_ENABLED=true
+      - ENDPOINTS_HEALTH_ENABLED=true
+      - DATASOURCES_DEFAULT_HOST=timescale
+      - DATASOURCES_DEFAULT_PORT=5432
+      - DATASOURCES_DEFAULT_USERNAME=orion
+      - DATASOURCES_DEFAULT_PASSWORD=orion
+      - DATASOURCES_DEFAULT_DATABASE=orion_cartif
+      - LOGGERS_LEVEL_ROOT=TRACE    
+ 
   grafana:
     image: grafana/grafana:latest
     hostname: grafana
     networks:
       - hostnet
     ports:
-      - 3000:3000  
+      - 443:3000
+    depends_on:
+      - mintaka_ros2  
+      - mintaka_opcua
     environment:
-      - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+      - GF_SERVER_PROTOCOL=https
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_SERVER_CERT_FILE=/etc/grafana/certs/grafana.crt
+      - GF_SERVER_CERT_KEY=/etc/grafana/certs/grafana.key
     volumes:
       - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
       - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
-
+      - ./conf/grafana/certificates:/etc/grafana/certs 
+    restart: always
   
+
 volumes:
   mongodb: ~
 
@@ -817,7 +870,8 @@ networks:
   hostnet:
     driver: bridge
 ```
-<div id="exampleQueryDashobard">
+
+</div>
 
 #### Example of how to build the query in the Grafana Dashboard
 
