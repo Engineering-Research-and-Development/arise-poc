@@ -375,7 +375,7 @@ Three different initialization modalities are available:
 Using the 'auto' mode  in the TEF1 of the ARISE project,  the initialization phase allowed us to define a mapping tool as follows:
 </p>
 
-<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+<div style="max-height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
 
 ```bash
 {
@@ -939,5 +939,5 @@ a.ts as "Timestamp"
 from "attributes" a 
 where a.id like '%velocityCommand'
 and compound->>'turtle_id' = '2';
-'''
+```
 
