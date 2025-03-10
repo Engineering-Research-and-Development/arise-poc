@@ -652,26 +652,7 @@ Modifying this file you can:
 -   Change IOTA_OPCUA_ENDPOINT
 
 
-<style>
-        .scrollable {
-            max-height: 100px; /* Imposta l'altezza massima */
-            overflow-y: auto; /* Abilita lo scrollbar verticale */
-            border: 1px solid #ccc; /* Aggiunge un bordo */
-            padding: 10px; /* Padding interno */
-        }
-        table {
-            width: 100%; /* Larghezza della tabella */
-            border-collapse: collapse; /* Collassa i bordi della tabella */
-        }
-        th, td {
-            border: 1px solid #ddd; /* Bordi delle celle */
-            padding: 8px; /* Padding delle celle */
-            text-align: left; /* Allineamento del testo */
-        }
-    </style>
- 
-  <td>
-    <div class="scrollable">
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
  
  ```bash
 
@@ -895,11 +876,6 @@ Modifying this file you can:
                   driver: bridge
  
 ```          
-  </div>
-</td> 
-
-
-
 
 
 #### Example of how to build the query in the Grafana Dashboard
