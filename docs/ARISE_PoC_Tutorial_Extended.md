@@ -375,9 +375,8 @@ Three different initialization modalities are available:
 Using the 'auto' mode  in the TEF1 of the ARISE project,  the initialization phase allowed us to define a mapping tool as follows:
 </p>
 
-<div style="max-height: 450px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+<pre style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
 
-```bash
 {
      types: {
         Device: {
@@ -624,8 +623,11 @@ Using the 'auto' mode  in the TEF1 of the ARISE project,  the initialization pha
     contextSubscriptions: [
     ]
 }
-```
-</div>
+
+</pre>
+
+
+
 
 ####  Monitor Container behaviour
 
