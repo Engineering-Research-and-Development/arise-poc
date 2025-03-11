@@ -382,252 +382,250 @@ Using the 'auto' mode in the TEF1 of the ARISE project, the initialization phase
 
 </p>
 
-```bash
+```json
 {
-     types: {
-        Device: {
-            active: [
-                {
-                    name: "Clock05Hz",
-                    type: "Boolean"
-                },
-                {
-                    name: "Icon",
-                    type: "ByteString"
-                },
-                {
-                    name: "StepDataOut",
-                    type: "Byte"
-                },
-                {
-                    name: "StateBits",
-                    type: "Byte"
-                },
-                {
-                    name: "ReadyFlag",
-                    type: "Boolean"
-                },
-                {
-                    name: "CurrentPosition",
-                    type: "Float"
-                },
-                {
-                    name: "CurrentSpeed",
-                    type: "Int16"
-                },
-                {
-                    name: "PushingForce",
-                    type: "Int16"
-                },
-                {
-                    name: "TargetPosition1",
-                    type: "Float"
-                },
-                {
-                    name: "Alarm1",
-                    type: "Byte"
-                },
-                {
-                    name: "Alarm2",
-                    type: "Byte"
-                },
-                {
-                    name: "Alarm3",
-                    type: "Byte"
-                },
-                {
-                    name: "Alarm4",
-                    type: "Byte"
-                },
-                {
-                    name: "BUSY",
-                    type: "Boolean"
-                },
-                {
-                    name: "SVRE",
-                    type: "Boolean"
-                },
-                {
-                    name: "SETON",
-                    type: "Boolean"
-                },
-                {
-                    name: "INP",
-                    type: "Boolean"
-                },
-                {
-                    name: "AREA",
-                    type: "Boolean"
-                },
-                {
-                    name: "WAREA",
-                    type: "Boolean"
-                },
-                {
-                    name: "ESTOP",
-                    type: "Boolean"
-                },
-                {
-                    name: "ALARM",
-                    type: "Boolean"
-                },
-                {
-                    name: "Search0",
-                    type: "Boolean"
-                }
-            ],
-            lazy: [],
-            commands: [
-                {
-                    name: "plc_maestro",
-                    type: "command"
-
-                }
-            ]
-        }
-    },
-    contexts: [
+  "types": {
+    "Device": {
+      "active": [
         {
-            id: "urn:ngsi-ld:Device:servidor_1DBRVC",
-            type: "Device",
-            mappings: [
-                {
-                    ocb_id: "Clock05Hz",
-                    opcua_id: "ns=4;i=23",
-                    object_id: "ns=4;i=23",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Icon",
-                    opcua_id: "ns=3;i=6010",
-                    object_id: "ns=3;i=6010",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "StepDataOut",
-                    opcua_id: "ns=4;i=3",
-                    object_id: "ns=4;i=3",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "StateBits",
-                    opcua_id: "ns=4;i=4",
-                    object_id: "ns=4;i=4",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "ReadyFlag",
-                    opcua_id: "ns=4;i=5",
-                    object_id: "ns=4;i=5",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "CurrentPosition",
-                    opcua_id: "ns=4;i=6",
-                    object_id: "ns=4;i=6",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "CurrentSpeed",
-                    opcua_id: "ns=4;i=7",
-                    object_id: "ns=4;i=7",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "PushingForce",
-                    opcua_id: "ns=4;i=8",
-                    object_id: "ns=4;i=8",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "TargetPosition1",
-                    opcua_id: "ns=4;i=9",
-                    object_id: "ns=4;i=9",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Alarm1",
-                    opcua_id: "ns=4;i=10",
-                    object_id: "ns=4;i=10",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Alarm2",
-                    opcua_id: "ns=4;i=11",
-                    object_id: "ns=4;i=11",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Alarm3",
-                    opcua_id: "ns=4;i=12",
-                    object_id: "ns=4;i=12",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Alarm4",
-                    opcua_id: "ns=4;i=13",
-                    object_id: "ns=4;i=13",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "BUSY",
-                    opcua_id: "ns=4;i=14",
-                    object_id: "ns=4;i=14",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "SVRE",
-                    opcua_id: "ns=4;i=15",
-                    object_id: "ns=4;i=15",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "SETON",
-                    opcua_id: "ns=4;i=16",
-                    object_id: "ns=4;i=16",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "INP",
-                    opcua_id: "ns=4;i=17",
-                    object_id: "ns=4;i=17",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "AREA",
-                    opcua_id: "ns=4;i=18",
-                    object_id: "ns=4;i=18",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "WAREA",
-                    opcua_id: "ns=4;i=19",
-                    object_id: "ns=4;i=19",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "ESTOP",
-                    opcua_id: "ns=4;i=20",
-                    object_id: "ns=4;i=20",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "ALARM",
-                    opcua_id: "ns=4;i=21",
-                    object_id: "ns=4;i=21",
-                    inputArguments: []
-                },
-                {
-                    ocb_id: "Search0",
-                    opcua_id: "ns=4;i=22",
-                    object_id: "ns=4;i=22",
-                    inputArguments: []
-                }
-            ]
+          "name": "Clock05Hz",
+          "type": "Boolean"
+        },
+        {
+          "name": "Icon",
+          "type": "ByteString"
+        },
+        {
+          "name": "StepDataOut",
+          "type": "Byte"
+        },
+        {
+          "name": "StateBits",
+          "type": "Byte"
+        },
+        {
+          "name": "ReadyFlag",
+          "type": "Boolean"
+        },
+        {
+          "name": "CurrentPosition",
+          "type": "Float"
+        },
+        {
+          "name": "CurrentSpeed",
+          "type": "Int16"
+        },
+        {
+          "name": "PushingForce",
+          "type": "Int16"
+        },
+        {
+          "name": "TargetPosition1",
+          "type": "Float"
+        },
+        {
+          "name": "Alarm1",
+          "type": "Byte"
+        },
+        {
+          "name": "Alarm2",
+          "type": "Byte"
+        },
+        {
+          "name": "Alarm3",
+          "type": "Byte"
+        },
+        {
+          "name": "Alarm4",
+          "type": "Byte"
+        },
+        {
+          "name": "BUSY",
+          "type": "Boolean"
+        },
+        {
+          "name": "SVRE",
+          "type": "Boolean"
+        },
+        {
+          "name": "SETON",
+          "type": "Boolean"
+        },
+        {
+          "name": "INP",
+          "type": "Boolean"
+        },
+        {
+          "name": "AREA",
+          "type": "Boolean"
+        },
+        {
+          "name": "WAREA",
+          "type": "Boolean"
+        },
+        {
+          "name": "ESTOP",
+          "type": "Boolean"
+        },
+        {
+          "name": "ALARM",
+          "type": "Boolean"
+        },
+        {
+          "name": "Search0",
+          "type": "Boolean"
         }
-    ],
-    contextSubscriptions: [
-    ]
+      ],
+      "lazy": [],
+      "commands": [
+        {
+          "name": "plc_maestro",
+          "type": "command"
+        }
+      ]
+    }
+  },
+  "contexts": [
+    {
+      "id": "urn:ngsi-ld:Device:servidor_1DBRVC",
+      "type": "Device",
+      "mappings": [
+        {
+          "ocb_id": "Clock05Hz",
+          "opcua_id": "ns=4;i=23",
+          "object_id": "ns=4;i=23",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Icon",
+          "opcua_id": "ns=3;i=6010",
+          "object_id": "ns=3;i=6010",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "StepDataOut",
+          "opcua_id": "ns=4;i=3",
+          "object_id": "ns=4;i=3",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "StateBits",
+          "opcua_id": "ns=4;i=4",
+          "object_id": "ns=4;i=4",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "ReadyFlag",
+          "opcua_id": "ns=4;i=5",
+          "object_id": "ns=4;i=5",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "CurrentPosition",
+          "opcua_id": "ns=4;i=6",
+          "object_id": "ns=4;i=6",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "CurrentSpeed",
+          "opcua_id": "ns=4;i=7",
+          "object_id": "ns=4;i=7",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "PushingForce",
+          "opcua_id": "ns=4;i=8",
+          "object_id": "ns=4;i=8",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "TargetPosition1",
+          "opcua_id": "ns=4;i=9",
+          "object_id": "ns=4;i=9",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Alarm1",
+          "opcua_id": "ns=4;i=10",
+          "object_id": "ns=4;i=10",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Alarm2",
+          "opcua_id": "ns=4;i=11",
+          "object_id": "ns=4;i=11",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Alarm3",
+          "opcua_id": "ns=4;i=12",
+          "object_id": "ns=4;i=12",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Alarm4",
+          "opcua_id": "ns=4;i=13",
+          "object_id": "ns=4;i=13",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "BUSY",
+          "opcua_id": "ns=4;i=14",
+          "object_id": "ns=4;i=14",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "SVRE",
+          "opcua_id": "ns=4;i=15",
+          "object_id": "ns=4;i=15",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "SETON",
+          "opcua_id": "ns=4;i=16",
+          "object_id": "ns=4;i=16",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "INP",
+          "opcua_id": "ns=4;i=17",
+          "object_id": "ns=4;i=17",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "AREA",
+          "opcua_id": "ns=4;i=18",
+          "object_id": "ns=4;i=18",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "WAREA",
+          "opcua_id": "ns=4;i=19",
+          "object_id": "ns=4;i=19",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "ESTOP",
+          "opcua_id": "ns=4;i=20",
+          "object_id": "ns=4;i=20",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "ALARM",
+          "opcua_id": "ns=4;i=21",
+          "object_id": "ns=4;i=21",
+          "inputArguments": []
+        },
+        {
+          "ocb_id": "Search0",
+          "opcua_id": "ns=4;i=22",
+          "object_id": "ns=4;i=22",
+          "inputArguments": []
+        }
+      ]
+    }
+  ],
+  "contextSubscriptions": []
 }
 ```
 
@@ -658,228 +656,228 @@ Modifying this file you can:
             padding: 10px;
             font-family: monospace;">
 
+```bash
 
- ```bash
+             services:
+               iot-agent:
+                 image: iotagent-opcua
+                 hostname: iotagent-opcua
+                 build: ./build/iotagent-opcua
+                 depends_on:
+                   - mongodb
+                   - orion
+                 networks:
+                   - hostnet
+                 extra_hosts:
+                   - "my-local-opcua-server:192.168.1.100"
+                 ports:
+                   #Exposed ports
+                   - "4041:4041"
+                   - "9229:9229"
+                   #End - Exposed ports
+                 environment:
+                   # Environment variables as before
+                   - "CONFIGURATION_TYPE=static"
+                   - "CONFIG_RETRIEVAL=false"
+                   - "DEFAULT_KEY=iot"
+                   - "DEFAULT_TRANSPORT=OPCUA"
+                   - "IOTA_LOGLEVEL=DEBUG"
+                   - "IOTA_TIMESTAMP=true"
+                   - "IOTA_CB_HOST=orion"
+                   - "IOTA_CB_PORT=1026"
+                   - "IOTA_CB_NGSIVERSION=ld"
+                   - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
+                   #Extra hosts in iot-agent
+                   - "IOTA_CB_SERVICE=opcua_server"
+                   #End - Extra hosts in iot-agent
+                   - "IOTA_CB_SUBSERVICE=/demo"
+                   - "IOTA_NORTH_PORT=4041"
+                   - "IOTA_REGISTRY_TYPE=mongodb"
+                   - "IOTA_MONGO_HOST=mongodb"
+                   - "IOTA_MONGO_PORT=27017"
+                   - "IOTA_MONGO_DB=iotagent_opcua"
+                   #Extra hosts in iot-agent
+                   - "IOTA_SERVICE=opcua_server"
+                   #End - Extra hosts in iot-agent
+                   - "IOTA_SUBSERVICE=/demo"
+                   - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
+                   - "IOTA_DEVICEREGDURATION=P20Y"
+                   - "IOTA_DEFAULTTYPE=Device"
+                   - "IOTA_DEFAULTRESOURCE=/iot/opcua"
+                   - "IOTA_EXPLICITATTRS=true"
+                   - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
+                   - "IOTA_AUTOPROVISION=true"
+                   - "IOTA_EXPRESS_LIMIT=50mb"
+                   #IOTA_OPCUA_ENDPOINT
+                   - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
+                   #End- IOTA_OPCUA_ENDPOINT
+                   - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
+                   - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
+                   # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
+                   # - "IOTA_OPCUA_SECURITY_PASSWORD=test"
+                   - "IOTA_OPCUA_UNIQUE_SUBSCRIPTION=false"
+                   - "IOTA_OPCUA_SUBSCRIPTION_NOTIFICATIONS_PER_PUBLISH=1000"
+                   - "IOTA_OPCUA_SUBSCRIPTION_PUBLISHING_ENABLED=true"
+                   - "IOTA_OPCUA_SUBSCRIPTION_REQ_LIFETIME_COUNT=100"
+                   - "IOTA_OPCUA_SUBSCRIPTION_REQ_MAX_KEEP_ALIVE_COUNT=10"
+                   - "IOTA_OPCUA_SUBSCRIPTION_REQ_PUBLISHING_INTERVAL=1000"
+                   - "IOTA_OPCUA_SUBSCRIPTION_PRIORITY=128"
+                   - "IOTA_OPCUA_MT_POLLING=false"
+                   - "IOTA_OPCUA_MT_AGENT_ID=age01_"
+                   - "IOTA_OPCUA_MT_ENTITY_ID=age01_Car"
+                   - "IOTA_OPCUA_MT_ENTITY_TYPE=Device"
+                   - "IOTA_OPCUA_MT_NAMESPACE_IGNORE=0,7"
+                   - "IOTA_OPCUA_MT_STORE_OUTPUT=true"
+                 volumes:
+                   - ./conf/iotagent-opcua:/opt/iotagent-opcua/conf
 
-              services:
-                iot-agent:
-                  image: iotagent-opcua
-                  hostname: iotagent-opcua
-                  build: ./build/iotagent-opcua
-                  depends_on:
-                    - mongodb
-                    - orion
-                  networks:
-                    - hostnet
-                  extra_hosts:
-                    - "my-local-opcua-server:192.168.1.100"
-                  ports:
-                    #Exposed ports
-                    - "4041:4041"
-                    - "9229:9229"
-                    #End - Exposed ports
-                  environment:
-                    # Environment variables as before
-                    - "CONFIGURATION_TYPE=static"
-                    - "CONFIG_RETRIEVAL=false"
-                    - "DEFAULT_KEY=iot"
-                    - "DEFAULT_TRANSPORT=OPCUA"
-                    - "IOTA_LOGLEVEL=DEBUG"
-                    - "IOTA_TIMESTAMP=true"
-                    - "IOTA_CB_HOST=orion"
-                    - "IOTA_CB_PORT=1026"
-                    - "IOTA_CB_NGSIVERSION=ld"
-                    - "IOTA_CB_NGSILDCONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-                    #Extra hosts in iot-agent
-                    - "IOTA_CB_SERVICE=opcua_server"
-                    #End - Extra hosts in iot-agent
-                    - "IOTA_CB_SUBSERVICE=/demo"
-                    - "IOTA_NORTH_PORT=4041"
-                    - "IOTA_REGISTRY_TYPE=mongodb"
-                    - "IOTA_MONGO_HOST=mongodb"
-                    - "IOTA_MONGO_PORT=27017"
-                    - "IOTA_MONGO_DB=iotagent_opcua"
-                    #Extra hosts in iot-agent
-                    - "IOTA_SERVICE=opcua_server"
-                    #End - Extra hosts in iot-agent
-                    - "IOTA_SUBSERVICE=/demo"
-                    - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
-                    - "IOTA_DEVICEREGDURATION=P20Y"
-                    - "IOTA_DEFAULTTYPE=Device"
-                    - "IOTA_DEFAULTRESOURCE=/iot/opcua"
-                    - "IOTA_EXPLICITATTRS=true"
-                    - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
-                    - "IOTA_AUTOPROVISION=true"
-                    - "IOTA_EXPRESS_LIMIT=50mb"
-                    #IOTA_OPCUA_ENDPOINT
-                    - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
-                    #End- IOTA_OPCUA_ENDPOINT
-                    - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
-                    - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
-                    # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
-                    # - "IOTA_OPCUA_SECURITY_PASSWORD=test"
-                    - "IOTA_OPCUA_UNIQUE_SUBSCRIPTION=false"
-                    - "IOTA_OPCUA_SUBSCRIPTION_NOTIFICATIONS_PER_PUBLISH=1000"
-                    - "IOTA_OPCUA_SUBSCRIPTION_PUBLISHING_ENABLED=true"
-                    - "IOTA_OPCUA_SUBSCRIPTION_REQ_LIFETIME_COUNT=100"
-                    - "IOTA_OPCUA_SUBSCRIPTION_REQ_MAX_KEEP_ALIVE_COUNT=10"
-                    - "IOTA_OPCUA_SUBSCRIPTION_REQ_PUBLISHING_INTERVAL=1000"
-                    - "IOTA_OPCUA_SUBSCRIPTION_PRIORITY=128"
-                    - "IOTA_OPCUA_MT_POLLING=false"
-                    - "IOTA_OPCUA_MT_AGENT_ID=age01_"
-                    - "IOTA_OPCUA_MT_ENTITY_ID=age01_Car"
-                    - "IOTA_OPCUA_MT_ENTITY_TYPE=Device"
-                    - "IOTA_OPCUA_MT_NAMESPACE_IGNORE=0,7"
-                    - "IOTA_OPCUA_MT_STORE_OUTPUT=true"
-                  volumes:
-                    - ./conf/iotagent-opcua:/opt/iotagent-opcua/conf
+               mongodb:
+                 image: mongo:4.4 #latest
+                 hostname: mongodb
+                 networks:
+                   - hostnet
+                 ports:
+                   - "27017:27017"
+                 command: --bind_ip_all
+                 volumes:
+                   - mongodb:/data
 
-                mongodb:
-                  image: mongo:4.4 #latest
-                  hostname: mongodb
-                  networks:
-                    - hostnet
-                  ports:
-                    - "27017:27017"
-                  command: --bind_ip_all
-                  volumes:
-                    - mongodb:/data
+               orion:
+                 image: fiware/orion-ld:1.8.0
+                 hostname: orion
+                 privileged: true
+                 ipc: host
+                 depends_on:
+                   - mongodb
+                 networks:
+                   - hostnet
+                 ports:
+                   - "1026:1026"
+                 restart: always
+                 command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
+                 environment:
+                   - ORIONLD_TROE=TRUE
+                   - ORIONLD_TROE_HOST=timescale
+                   - ORIONLD_TROE_PORT=5432
+                   - ORIONLD_TROE_USER=orion
+                   - ORIONLD_TROE_PWD=orion
+                   - ORIONLD_MONGO_HOST=mongodb
+                 volumes:
+                   - ./conf/orionld/config-dds.json:/root/.orionld
+                 healthcheck:
+                   test: curl --fail -s http://orion:1026/version || exit 1
+                   interval: 30s
+                   retries: 15
 
-                orion:
-                  image: fiware/orion-ld:1.8.0
-                  hostname: orion
-                  privileged: true
-                  ipc: host
-                  depends_on:
-                    - mongodb
-                  networks:
-                    - hostnet
-                  ports:
-                    - "1026:1026"
-                  restart: always
-                  command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -forwarding -experimental
-                  environment:
-                    - ORIONLD_TROE=TRUE
-                    - ORIONLD_TROE_HOST=timescale
-                    - ORIONLD_TROE_PORT=5432
-                    - ORIONLD_TROE_USER=orion
-                    - ORIONLD_TROE_PWD=orion
-                    - ORIONLD_MONGO_HOST=mongodb
-                  volumes:
-                    - ./conf/orionld/config-dds.json:/root/.orionld
-                  healthcheck:
-                    test: curl --fail -s http://orion:1026/version || exit 1
-                    interval: 30s
-                    retries: 15
+               ros2:
+                 image: ros2
+                 hostname: ros2
+                 container_name: ros2
+                 privileged: true
+                 ipc: host
+                 build: ./build/ros2
+                 networks:
+                   - hostnet
+                 environment:
+                   DISPLAY: "$DISPLAY"
+                 volumes:
+                   - /tmp/.X11-unix:/tmp/.X11-unix
 
-                ros2:
-                  image: ros2
-                  hostname: ros2
-                  container_name: ros2
-                  privileged: true
-                  ipc: host
-                  build: ./build/ros2
-                  networks:
-                    - hostnet
-                  environment:
-                    DISPLAY: "$DISPLAY"
-                  volumes:
-                    - /tmp/.X11-unix:/tmp/.X11-unix
-
-                timescale:
-                  image: timescale/timescaledb-ha:pg17-ts2.18
-                  hostname: timescale
-                  networks:
-                    - hostnet
-                  ports:
-                    - "5432:5432"
-                  environment:
-                    - POSTGRES_USER=orion
-                    - POSTGRES_PASSWORD=orion
-                    - POSTGRES_HOST_AUTH_METHOD=trust
-                  command: ["postgres", "-c", "log_statement=all"]
-                  healthcheck:
-                    test: [ "CMD-SHELL", "pg_isready -U orion" ]
-                    interval: 15s
-                    timeout: 15s
-                    retries: 5
-                    start_period: 60s
-
-
-                mintaka_ros2:
-                  image: fiware/mintaka:0.6.18
-                  hostname: mintaka_ros2
-                  restart: always
-                  networks:
-                    - hostnet
-                  ports:
-                    - "8080:8080"
-                  environment:
-                    - MICRONAUT_SERVER_PORT=8080
-                    - MICRONAUT_METRICS_ENABLED=true
-                    - ENDPOINTS_ALL_PORT=8080
-                    - ENDPOINTS_METRICS_ENABLED=true
-                    - ENDPOINTS_HEALTH_ENABLED=true
-                    - DATASOURCES_DEFAULT_HOST=timescale
-                    - DATASOURCES_DEFAULT_PORT=5432
-                    - DATASOURCES_DEFAULT_USERNAME=orion
-                    - DATASOURCES_DEFAULT_PASSWORD=orion
-                    - DATASOURCES_DEFAULT_DATABASE=orion
-                    - LOGGERS_LEVEL_ROOT=TRACE
-
-                mintaka_opcua:
-                  image: fiware/mintaka:0.6.18
-                  hostname: mintaka_opcua
-                  restart: always
-                  networks:
-                    - hostnet
-                  ports:
-                    - "8081:8081"
-                  environment:
-                    - MICRONAUT_SERVER_PORT=8081
-                    - MICRONAUT_METRICS_ENABLED=true
-                    - ENDPOINTS_ALL_PORT=8081
-                    - ENDPOINTS_METRICS_ENABLED=true
-                    - ENDPOINTS_HEALTH_ENABLED=true
-                    - DATASOURCES_DEFAULT_HOST=timescale
-                    - DATASOURCES_DEFAULT_PORT=5432
-                    - DATASOURCES_DEFAULT_USERNAME=orion
-                    - DATASOURCES_DEFAULT_PASSWORD=orion
-                    - DATASOURCES_DEFAULT_DATABASE=orion_cartif
-                    - LOGGERS_LEVEL_ROOT=TRACE
-
-                grafana:
-                  image: grafana/grafana:latest
-                  hostname: grafana
-                  networks:
-                    - hostnet
-                  ports:
-                    - 443:3000
-                  depends_on:
-                    - mintaka_ros2
-                    - mintaka_opcua
-                  environment:
-                    - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
-                    - GF_SERVER_PROTOCOL=https
-                    - GF_SERVER_HTTP_PORT=3000
-                    - GF_SERVER_CERT_FILE=/etc/grafana/certs/grafana.crt
-                    - GF_SERVER_CERT_KEY=/etc/grafana/certs/grafana.key
-                  volumes:
-                    - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
-                    - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
-                    - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
-                    - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
-                    - ./conf/grafana/certificates:/etc/grafana/certs
-                  restart: always
+               timescale:
+                 image: timescale/timescaledb-ha:pg17-ts2.18
+                 hostname: timescale
+                 networks:
+                   - hostnet
+                 ports:
+                   - "5432:5432"
+                 environment:
+                   - POSTGRES_USER=orion
+                   - POSTGRES_PASSWORD=orion
+                   - POSTGRES_HOST_AUTH_METHOD=trust
+                 command: ["postgres", "-c", "log_statement=all"]
+                 healthcheck:
+                   test: [ "CMD-SHELL", "pg_isready -U orion" ]
+                   interval: 15s
+                   timeout: 15s
+                   retries: 5
+                   start_period: 60s
 
 
-              volumes:
-                mongodb: ~
+               mintaka_ros2:
+                 image: fiware/mintaka:0.6.18
+                 hostname: mintaka_ros2
+                 restart: always
+                 networks:
+                   - hostnet
+                 ports:
+                   - "8080:8080"
+                 environment:
+                   - MICRONAUT_SERVER_PORT=8080
+                   - MICRONAUT_METRICS_ENABLED=true
+                   - ENDPOINTS_ALL_PORT=8080
+                   - ENDPOINTS_METRICS_ENABLED=true
+                   - ENDPOINTS_HEALTH_ENABLED=true
+                   - DATASOURCES_DEFAULT_HOST=timescale
+                   - DATASOURCES_DEFAULT_PORT=5432
+                   - DATASOURCES_DEFAULT_USERNAME=orion
+                   - DATASOURCES_DEFAULT_PASSWORD=orion
+                   - DATASOURCES_DEFAULT_DATABASE=orion
+                   - LOGGERS_LEVEL_ROOT=TRACE
 
-              networks:
-                hostnet:
-                  driver: bridge
+               mintaka_opcua:
+                 image: fiware/mintaka:0.6.18
+                 hostname: mintaka_opcua
+                 restart: always
+                 networks:
+                   - hostnet
+                 ports:
+                   - "8081:8081"
+                 environment:
+                   - MICRONAUT_SERVER_PORT=8081
+                   - MICRONAUT_METRICS_ENABLED=true
+                   - ENDPOINTS_ALL_PORT=8081
+                   - ENDPOINTS_METRICS_ENABLED=true
+                   - ENDPOINTS_HEALTH_ENABLED=true
+                   - DATASOURCES_DEFAULT_HOST=timescale
+                   - DATASOURCES_DEFAULT_PORT=5432
+                   - DATASOURCES_DEFAULT_USERNAME=orion
+                   - DATASOURCES_DEFAULT_PASSWORD=orion
+                   - DATASOURCES_DEFAULT_DATABASE=orion_cartif
+                   - LOGGERS_LEVEL_ROOT=TRACE
+
+               grafana:
+                 image: grafana/grafana:latest
+                 hostname: grafana
+                 networks:
+                   - hostnet
+                 ports:
+                   - 443:3000
+                 depends_on:
+                   - mintaka_ros2
+                   - mintaka_opcua
+                 environment:
+                   - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+                   - GF_SERVER_PROTOCOL=https
+                   - GF_SERVER_HTTP_PORT=3000
+                   - GF_SERVER_CERT_FILE=/etc/grafana/certs/grafana.crt
+                   - GF_SERVER_CERT_KEY=/etc/grafana/certs/grafana.key
+                 volumes:
+                   - ./conf/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+                   - ./conf/grafana/datasources:/etc/grafana/provisioning/datasources
+                   - ./conf/grafana/alerting:/etc/grafana/provisioning/alerting
+                   - ./conf/grafana/dashboards:/var/lib/grafana/dashboards
+                   - ./conf/grafana/certificates:/etc/grafana/certs
+                 restart: always
+
+
+             volumes:
+               mongodb: ~
+
+             networks:
+               hostnet:
+                 driver: bridge
 ```
+
 </div>
 
 #### Example of how to build the query in the Grafana Dashboard
@@ -916,7 +914,7 @@ To select the data to be used in Grafana dashboards, the following columns can b
   entityid ='urn:ngsi-ld:robot:1'
   id= 'https://uri.etsi.org/ngsi-ld/default-context/pose'
   compound='{"x": 9.943054, "y": 4.432139, "theta": -0.544, "turtle_id": 2, "linear_velocity": 2, "angular_velocity": 0}'
-````
+```
 
 <p align="justify">
 The "entityId" column identifies the ID of the entity, while the "id" column specifies the type of the data, such as 'Pose'. The data are described in the "compound" column, which is defined as a jsonb type.
