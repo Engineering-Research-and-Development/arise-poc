@@ -381,7 +381,8 @@ Three different initialization modalities are available:
 Using the 'auto' mode in the TEF1 of the ARISE project, the initialization phase allowed us to define a mapping tool as follows:
 
 </p>
-<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"> 
 
 ```json
 {
@@ -651,14 +652,10 @@ Modifying this file you can:
 - Change extra hosts in iot-agent
 - Change IOTA_OPCUA_ENDPOINT
 
-<div style=" max-height: 300px; /* Altezza massima */
-            overflow-y: auto;  /* Abilita scrollbar verticale */
-            border: 1px solid #ddd;
-            background-color: #f5f5f5;
-            padding: 10px;
-            font-family: monospace;">
 
-```bash
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"> 
+
+```yaml
 
              services:
                iot-agent:
