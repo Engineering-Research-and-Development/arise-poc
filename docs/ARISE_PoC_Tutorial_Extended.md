@@ -381,6 +381,7 @@ Three different initialization modalities are available:
 Using the 'auto' mode in the TEF1 of the ARISE project, the initialization phase allowed us to define a mapping tool as follows:
 
 </p>
+<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
 
 ```json
 {
@@ -628,6 +629,7 @@ Using the 'auto' mode in the TEF1 of the ARISE project, the initialization phase
   "contextSubscriptions": []
 }
 ```
+</div>
 
 #### Monitor Container behaviour
 
