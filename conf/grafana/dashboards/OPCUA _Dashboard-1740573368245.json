@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -61,7 +61,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line+area"
             }
           },
           "mappings": [],
@@ -74,7 +74,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 40
               }
             ]
           }
@@ -112,7 +112,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/SETON'",
+          "rawSql": "SELECT (a.compound->>'@value')::INTEGER AS \"Current Speed\", a.ts AS Time\r\nFROM attributes a\r\nwhere a.id like '%/CurrentSpeed'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -133,7 +133,7 @@
           }
         }
       ],
-      "title": "SETON",
+      "title": "Current Speed  - OPOCUA",
       "type": "timeseries"
     },
     {
@@ -144,15 +144,40 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "fixed"
+            "mode": "palette-classic"
           },
           "custom": {
-            "align": "center",
-            "cellOptions": {
-              "type": "auto"
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "filterable": false,
-            "inspect": false
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -164,7 +189,7 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 35
               }
             ]
           }
@@ -177,25 +202,19 @@
         "x": 12,
         "y": 0
       },
-      "id": 3,
+      "id": 5,
       "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": true,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showHeader": true,
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "time"
-          }
-        ]
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -208,8 +227,8 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/AREA'",
-          "refId": "A",
+          "rawSql": "SELECT (a.compound->>'@value')::INTEGER AS \"Pushing Force\", a.ts AS Time\r\nFROM attributes a\r\nwhere  a.id like '%/PushingForce'",
+          "refId": "D",
           "sql": {
             "columns": [
               {
@@ -229,7 +248,7 @@
           }
         }
       ],
-      "title": "AREA",
+      "title": "Pushing Force- OPCUA",
       "transformations": [
         {
           "id": "extractFields",
@@ -242,44 +261,11 @@
             ],
             "keepTime": false,
             "replace": false,
-            "source": "__original_ngsi_entity__"
-          }
-        },
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "json",
-            "jsonPaths": [
-              {
-                "path": "AREA"
-              }
-            ],
-            "keepTime": false,
-            "replace": true,
-            "source": "data"
-          }
-        },
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "json",
-            "jsonPaths": [
-              {
-                "alias": "Value",
-                "path": "value"
-              },
-              {
-                "alias": "Time",
-                "path": "observedAt"
-              }
-            ],
-            "keepTime": false,
-            "replace": true,
-            "source": "AREA"
+            "source": "stepdataout"
           }
         }
       ],
-      "type": "table"
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -289,7 +275,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
             "axisBorderShow": false,
@@ -309,7 +295,7 @@
               "type": "linear"
             },
             "thresholdsStyle": {
-              "mode": "line"
+              "mode": "line+area"
             }
           },
           "mappings": [],
@@ -322,15 +308,7 @@
               },
               {
                 "color": "red",
-                "value": 30
-              },
-              {
-                "color": "#EAB839",
                 "value": 40
-              },
-              {
-                "color": "#6ED0E0",
-                "value": 50
               }
             ]
           }
@@ -338,7 +316,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 12,
         "x": 0,
         "y": 8
@@ -352,19 +330,20 @@
         "legend": {
           "calcs": [],
           "displayMode": "list",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "orientation": "auto",
-        "showValue": "auto",
+        "showValue": "always",
         "stacking": "none",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
         },
+        "xField": "ts",
         "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
+        "xTickLabelSpacing": 100
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -404,7 +383,7 @@
           "table": "etdevice"
         }
       ],
-      "title": "Alarm4",
+      "title": "Alarm4 - OPCUA",
       "transformations": [
         {
           "id": "extractFields",
@@ -431,7 +410,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
           "custom": {
             "axisBorderShow": false,
@@ -439,34 +418,22 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line+area"
             }
           },
-          "fieldMinMax": true,
+          "fieldMinMax": false,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -477,48 +444,40 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 40
               }
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "@value"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 10,
         "w": 12,
         "x": 12,
         "y": 8
       },
       "id": 4,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
+        "orientation": "auto",
+        "showValue": "always",
+        "stacking": "none",
         "tooltip": {
-          "hideZeros": false,
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
       },
       "pluginVersion": "11.4.0",
       "targets": [
@@ -531,7 +490,7 @@
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT (compound ->>'@value')::INTEGER AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Compound' and a.id like '%Alarm2'",
+          "rawSql": "SELECT (compound ->>'@value')::INTEGER AS Alarm2, a.ts as Time\r\nFROM attributes a\r\nwhere a.\"valuetype\"='Compound' and a.id like '%Alarm2'",
           "refId": "D",
           "sql": {
             "columns": [
@@ -552,7 +511,7 @@
           }
         }
       ],
-      "title": "Alarm2",
+      "title": "Alarm2 - OPCUA",
       "transformations": [
         {
           "id": "extractFields",
@@ -569,308 +528,11 @@
           }
         }
       ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "grafana-postgresql-datasource",
-        "uid": "P6B2B9F59510FEDAB"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 16
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "P6B2B9F59510FEDAB"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/BUSY'",
-          "refId": "A",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        }
-      ],
-      "title": "BUSY",
-      "transformations": [
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "auto",
-            "jsonPaths": [
-              {
-                "path": "data"
-              }
-            ],
-            "keepTime": false,
-            "replace": false,
-            "source": "__original_ngsi_entity__"
-          }
-        },
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "json",
-            "jsonPaths": [
-              {
-                "alias": "Value",
-                "path": "TargetPosition1.value"
-              },
-              {
-                "alias": "Time",
-                "path": "TargetPosition1.observedAt"
-              }
-            ],
-            "keepTime": false,
-            "replace": true,
-            "source": "data"
-          }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "grafana-postgresql-datasource",
-        "uid": "P6B2B9F59510FEDAB"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "@value"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 16
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "grafana-postgresql-datasource",
-            "uid": "P6B2B9F59510FEDAB"
-          },
-          "editorMode": "code",
-          "format": "table",
-          "hide": false,
-          "rawQuery": true,
-          "rawSql": "SELECT a.\"boolean\" AS value, a.ts \r\nFROM attributes a\r\nwhere a.\"valuetype\"='Boolean' and a.id like '%/WAREA'",
-          "refId": "D",
-          "sql": {
-            "columns": [
-              {
-                "parameters": [],
-                "type": "function"
-              }
-            ],
-            "groupBy": [
-              {
-                "property": {
-                  "type": "string"
-                },
-                "type": "groupBy"
-              }
-            ],
-            "limit": 50
-          }
-        }
-      ],
-      "title": "StepDataOut",
-      "transformations": [
-        {
-          "id": "extractFields",
-          "options": {
-            "format": "auto",
-            "jsonPaths": [
-              {
-                "path": "data"
-              }
-            ],
-            "keepTime": false,
-            "replace": false,
-            "source": "stepdataout"
-          }
-        }
-      ],
-      "type": "timeseries"
+      "type": "barchart"
     }
   ],
   "preload": false,
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 40,
   "tags": [],
   "templating": {

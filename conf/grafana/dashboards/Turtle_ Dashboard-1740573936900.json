@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 6,
   "links": [],
   "panels": [
     {
@@ -1183,6 +1183,7 @@
     }
   ],
   "preload": false,
+  "refresh": "auto",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
@@ -1206,8 +1207,8 @@
     ]
   },
   "time": {
-    "from": "2024-11-29T10:56:35.583Z",
-    "to": "2024-11-29T10:58:56.225Z"
+    "from": "2025-02-26T12:40:12.977Z",
+    "to": "2025-02-26T12:43:11.652Z"
   },
   "timepicker": {},
   "timezone": "browser",

@@ -33,8 +33,8 @@ services:
       - "IOTA_MONGO_HOST=mongodb"
       - "IOTA_MONGO_PORT=27017"
       - "IOTA_MONGO_DB=iotagent_opcua"
-      # - "IOTA_SERVICE=opcua_server"
-      - "IOTA_SERVICE=cartif"
+      - "IOTA_SERVICE=opcua_server"
+      #- "IOTA_SERVICE=cartif"
       - "IOTA_SUBSERVICE=/demo"
       - "IOTA_PROVIDER_URL=http://iotagent-opcua:4041"
       - "IOTA_DEVICEREGDURATION=P20Y"
@@ -44,8 +44,8 @@ services:
       - "IOTA_EXTENDED_FORBIDDEN_CHARACTERS=[]"
       - "IOTA_AUTOPROVISION=true"
       - "IOTA_EXPRESS_LIMIT=50mb"
-      # - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
-      - "IOTA_OPCUA_ENDPOINT=opc.tcp://192.168.1.32:4840/cartif"
+      - "IOTA_OPCUA_ENDPOINT=opc.tcp://host.docker.internal:4840/opcua_server"
+      #- "IOTA_OPCUA_ENDPOINT=opc.tcp://192.168.1.32:4840/cartif"
       - "IOTA_OPCUA_SECURITY_MODE=None" #SignAndEncrypt
       - "IOTA_OPCUA_SECURITY_POLICY=None" #Basic256Sha256
       # - "IOTA_OPCUA_SECURITY_USERNAME=user1"
@@ -78,7 +78,6 @@ services:
       - mongodb:/data
 
   orion:
-    #image: fiware/orion-ld:1.8.0-PRE-1646
     image: fiware/orion-ld:1.8.0
     hostname: orion
     privileged: true
@@ -120,7 +119,6 @@ services:
        - /tmp/.X11-unix:/tmp/.X11-unix
 
   timescale:
-    #image: timescale/timescaledb-postgis:1.7.5-pg12
     image: timescale/timescaledb-ha:pg17-ts2.18
     hostname: timescale
     networks:
@@ -139,10 +137,10 @@ services:
       retries: 5
       start_period: 60s
 
-  mintaka:
-    #image: fiware/mintaka:0.4.3
+  
+  mintaka_ros2:
     image: fiware/mintaka:0.6.18
-    hostname: mintaka
+    hostname: mintaka_ros2
     restart: always
     networks:
       - hostnet 
@@ -162,7 +160,6 @@ services:
       - LOGGERS_LEVEL_ROOT=TRACE
   
   mintaka_opcua:
-    #image: fiware/mintaka:0.4.3
     image: fiware/mintaka:0.6.18
     hostname: mintaka_opcua
     restart: always
@@ -182,7 +179,7 @@ services:
       - DATASOURCES_DEFAULT_PASSWORD=orion
       - DATASOURCES_DEFAULT_DATABASE=orion_cartif
       - LOGGERS_LEVEL_ROOT=TRACE    
-
+ 
   grafana:
     image: grafana/grafana:latest
     hostname: grafana
@@ -191,9 +188,10 @@ services:
     ports:
       - 443:3000
     depends_on:
-      - mintaka  
+      - mintaka_ros2  
+      - mintaka_opcua
     environment:
-      - GF_INSTALL-PLUGINS=yesoreyeram-infinity-datasource
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
       - GF_SERVER_PROTOCOL=https
       - GF_SERVER_HTTP_PORT=3000
       - GF_SERVER_CERT_FILE=/etc/grafana/certs/grafana.crt
@@ -206,6 +204,7 @@ services:
       - ./conf/grafana/certificates:/etc/grafana/certs 
     restart: always
   
+
 volumes:
   mongodb: ~
 

@@ -1,0 +1,618 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 6,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "aee7znssxxvr4c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "columns": [
+            {
+              "selector": "modifiedAt",
+              "text": "Time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "value.angular.x",
+              "text": "Angular X",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.y",
+              "text": "Angular Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.z",
+              "text": "Angular Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear X",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.y",
+              "text": "Linear Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.turtle_id",
+              "text": "Turtle Id",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "aee7znssxxvr4c"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "velocityCommand",
+          "source": "url",
+          "type": "json",
+          "url": "http://mintaka_ros2:8080/temporal/entities/urn:ngsi-ld:robot:1?timeproperty=modifiedAt&timerel=between&timeAt=2024-01-01T00:00:00&endTimeAt=2026-01-01T00:00:00",
+          "url_options": {
+            "data": "",
+            "headers": [
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Historical Data - Velocity Command - Turtle 1",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "1"
+                  }
+                },
+                "fieldName": "Turtle Id"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Angular X",
+                "Angular Y",
+                "Angular Z",
+                "Linear X",
+                "Linear Y",
+                "Linear Z",
+                "Time"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "aee7znssxxvr4c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "columns": [
+            {
+              "selector": "modifiedAt",
+              "text": "Time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "value.angular.x",
+              "text": "Angular X",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.y",
+              "text": "Angular Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.z",
+              "text": "Angular Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear X",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.y",
+              "text": "Linear Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.turtle_id",
+              "text": "Turtle Id",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "aee7znssxxvr4c"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "velocityCommand",
+          "source": "url",
+          "type": "json",
+          "url": "http://mintaka_ros2:8080/temporal/entities/urn:ngsi-ld:robot:1?timeproperty=modifiedAt&timerel=between&timeAt=2024-01-01T00:00:00&endTimeAt=2026-01-01T00:00:00",
+          "url_options": {
+            "data": "",
+            "headers": [
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Historical Data - Velocity Command - Turtle 2",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "2"
+                  }
+                },
+                "fieldName": "Turtle Id"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Angular X",
+                "Angular Y",
+                "Angular Z",
+                "Linear X",
+                "Linear Y",
+                "Linear Z",
+                "Time"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "aee7znssxxvr4c"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "columns": [
+            {
+              "selector": "modifiedAt",
+              "text": "Time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "value.angular.x",
+              "text": "Angular X",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.y",
+              "text": "Angular Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.angular.z",
+              "text": "Angular Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear X",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.y",
+              "text": "Linear Y",
+              "type": "number"
+            },
+            {
+              "selector": "value.linear.z",
+              "text": "Linear Z",
+              "type": "number"
+            },
+            {
+              "selector": "value.turtle_id",
+              "text": "Turtle Id",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "aee7znssxxvr4c"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "parser": "backend",
+          "refId": "A",
+          "root_selector": "velocityCommand",
+          "source": "url",
+          "type": "json",
+          "url": "http://mintaka_ros2:8080/temporal/entities/urn:ngsi-ld:robot:1?timeproperty=modifiedAt&timerel=between&timeAt=2024-01-01T00:00:00&endTimeAt=2026-01-01T00:00:00",
+          "url_options": {
+            "data": "",
+            "headers": [
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET"
+          }
+        }
+      ],
+      "title": "Historical Data - Velocity Command - Turtle 3",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "3"
+                  }
+                },
+                "fieldName": "Turtle Id"
+              }
+            ],
+            "match": "any",
+            "type": "include"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "Angular X",
+                "Angular Y",
+                "Angular Z",
+                "Linear X",
+                "Linear Y",
+                "Linear Z",
+                "Time"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "auto",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2025-02-26T11:36:21.647Z",
+    "to": "2025-02-26T11:36:38.188Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Historical Data - Velocity Command - ARISE",
+  "uid": "fee880avqp5vka",
+  "version": 6,
+  "weekStart": ""
+}
