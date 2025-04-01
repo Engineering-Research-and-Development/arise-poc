@@ -655,6 +655,8 @@ Modifying this file you can:
 
 <div style="max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"> 
 
+<div style="max-height: 500px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+
 ```yaml
 
              services:
@@ -878,6 +880,7 @@ Modifying this file you can:
 ```
 
 </div>
+
 
 #### Example of how to build the query in the Grafana Dashboard
 
