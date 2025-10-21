@@ -88,7 +88,7 @@ services:
     ports:
       - "1026:1026"
     restart: always
-    command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly -t 0-255 -kt 0-2000
+    command: -dbhost mongodb -logLevel DEBUG -wip dds -mongocOnly # -t 0-255 -kt 0-2000
     environment:
       - ORIONLD_TROE=TRUE
       - ORIONLD_TROE_HOST=timescale
