@@ -202,7 +202,6 @@ services:
       - ./conf/grafana/certificates:/etc/grafana/certs 
     restart: always
   
-
 volumes:
   mongodb: ~
 
